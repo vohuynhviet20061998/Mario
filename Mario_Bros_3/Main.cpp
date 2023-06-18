@@ -4,7 +4,7 @@
 #include <d3dx10.h>
 #include <list>
 
-//#include "debug.h"
+#include "debug.h"
 //#include "Game.h"
 //#include "GameObject.h"
 //#include "Textures.h"
