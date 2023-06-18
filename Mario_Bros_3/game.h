@@ -17,6 +17,7 @@ using namespace std;
 #define MAX_FRAME_RATE 100
 #define KEYBOARD_BUFFER_SIZE 1024
 #define KEYBOARD_STATE_SIZE 256
+#define MAX_GAME_LINE 1024
 
 
 
@@ -57,8 +58,8 @@ class CGame
 	int current_scene;
 	int next_scene = -1;
 
-	/*void _ParseSection_SETTINGS(string line);
-	void _ParseSection_SCENES(string line);*/
+	void _ParseSection_SETTINGS(string line);
+	void _ParseSection_SCENES(string line);
 
 public:
 	// Init DirectX, Sprite Handler
@@ -112,7 +113,7 @@ public:
 	/*void SwitchScene();*/
 	/*void InitiateSwitchScene(int scene_id);*/
 
-	/*void _ParseSection_TEXTURES(string line);*/
+	void _ParseSection_TEXTURES(string line);
 
 
 	~CGame();
