@@ -10,7 +10,7 @@ using namespace std;
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 
-//#include "Texture.h"
+#include "Texture.h"
 //#include "KeyEventHandler.h"
 //#include "Scene.h"
 
@@ -69,7 +69,7 @@ public:
 	// Draw a portion or ALL the texture at position (x,y) on the screen. (x,y) is at the CENTER of the image
 	// rect : if NULL, the whole texture will be drawn
 	//        if NOT NULL, only draw that portion of the texture 
-	/*void Draw(float x, float y, LPTEXTURE tex, RECT* rect = NULL, float alpha = 1.0f, int sprite_width = 0, int sprite_height = 0);
+	void Draw(float x, float y, LPTEXTURE tex, RECT* rect = NULL, float alpha = 1.0f, int sprite_width = 0, int sprite_height = 0);
 
 	void Draw(float x, float y, LPTEXTURE tex, int l, int t, int r, int b, float alpha = 1.0f, int sprite_width = 0, int sprite_height = 0)
 	{
@@ -81,7 +81,7 @@ public:
 		this->Draw(x, y, tex, &rect, alpha, sprite_width, sprite_height);
 	}
 
-	LPTEXTURE LoadTexture(LPCWSTR texturePath);*/
+	LPTEXTURE LoadTexture(LPCWSTR texturePath);
 
 	// Keyboard related functions 
 	void InitKeyboard();
