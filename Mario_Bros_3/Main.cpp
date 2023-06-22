@@ -7,7 +7,7 @@
 #include "debug.h"
 #include "Game.h"
 //#include "GameObject.h"
-//#include "Textures.h"
+#include "Textures.h"
 #include "Animation.h"
 #include "Animations.h"
 //
@@ -17,7 +17,7 @@
 //#include "Coin.h"
 //#include "Platform.h"
 //
-//#include "SampleKeyEventHandler.h"
+#include "SampleKeyEventHandler.h"
 //
 //#include "AssetIDs.h"
 
@@ -49,7 +49,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 */
 void Update(DWORD dt)
 {
-	/*CGame::GetInstance()->GetCurrentScene()->Update(dt);*/
+	CGame::GetInstance()->GetCurrentScene()->Update(dt);
 }
 
 /*
@@ -71,7 +71,7 @@ void Render()
 	FLOAT NewBlendFactor[4] = { 0,0,0,0 };
 	pD3DDevice->OMSetBlendState(g->GetAlphaBlending(), NewBlendFactor, 0xffffffff);
 
-	/*CGame::GetInstance()->GetCurrentScene()->Render();*/
+	CGame::GetInstance()->GetCurrentScene()->Render();
 
 	spriteHandler->End();
 	pSwapChain->Present(0, 0);
@@ -151,11 +151,11 @@ int Run()
 		{
 			frameStart = now;
 
-			/*CGame::GetInstance()->ProcessKeyboard();*/
+			CGame::GetInstance()->ProcessKeyboard();
 			Update(dt);
 			Render();
 
-			/*CGame::GetInstance()->SwitchScene();*/
+			CGame::GetInstance()->SwitchScene();
 		}
 		else
 			Sleep(tickPerFrame - dt);
@@ -180,7 +180,7 @@ int WINAPI WinMain(
 
 
 	//IMPORTANT: this is the only place where a hardcoded file name is allowed ! 
-	game->Load(L"Game-start.txt");
+	game->Load(L"./Resource/Game-start.txt");
 
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 

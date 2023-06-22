@@ -486,7 +486,11 @@ void CGame::Load(LPCWSTR gameFile)
 			continue;
 		}
 
+
+
 		if (line == "[TEXTURES]") { section = GAME_FILE_SECTION_TEXTURES; continue; }
+
+		if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
 
 		if (line[0] == '[') {
 			section = GAME_FILE_SECTION_UNKNOWN;
@@ -503,6 +507,9 @@ void CGame::Load(LPCWSTR gameFile)
 		case GAME_FILE_SECTION_TEXTURES: 
 			_ParseSection_TEXTURES(line); 
 			break;
+		case GAME_FILE_SECTION_SCENES: 
+			_ParseSection_SCENES(line); 
+			break;
 		}
 	}
 
@@ -517,7 +524,7 @@ void CGame::SwitchScene()
 
 	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
 
-	scenes[current_scene]->Unload();
+	/*scenes[current_scene]->Unload();*/
 
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();

@@ -297,9 +297,9 @@ void CPlayScene::Unload()
 		delete objects[i];
 
 	objects.clear();
-	player = NULL;
+	player = NULL;*/
 
-	DebugOut(L"[INFO] Scene %d unloaded! \n", id);*/
+	DebugOut(L"[INFO] Scene %d unloaded! \n", id);
 }
 
 //bool CPlayScene::IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }
