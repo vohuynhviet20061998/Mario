@@ -11,8 +11,8 @@ using namespace std;
 #include <dinput.h>
 
 #include "Texture.h"
-//#include "KeyEventHandler.h"
-//#include "Scene.h"
+#include "KeyEventHandler.h"
+#include "Scene.h"
 
 #define MAX_FRAME_RATE 100
 #define KEYBOARD_BUFFER_SIZE 1024
@@ -45,7 +45,7 @@ class CGame
 	BYTE  keyStates[KEYBOARD_STATE_SIZE];			// DirectInput keyboard state buffer 
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 
-	//LPKEYEVENTHANDLER keyHandler;
+	LPKEYEVENTHANDLER keyHandler;
 
 	float cam_x = 0.0f;
 	float cam_y = 0.0f;
@@ -54,7 +54,7 @@ class CGame
 
 	ID3D10SamplerState* pPointSamplerState;
 
-	//unordered_map<int, LPSCENE> scenes;
+	unordered_map<int, LPSCENE> scenes;
 	int current_scene;
 	int next_scene = -1;
 
@@ -86,8 +86,8 @@ public:
 	// Keyboard related functions 
 	void InitKeyboard();
 	int IsKeyDown(int KeyCode);
-	/*void ProcessKeyboard();*/
-	//void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }
+	void ProcessKeyboard();
+	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }
 
 
 	ID3D10Device* GetDirect3DDevice() { return this->pD3DDevice; }
@@ -108,10 +108,10 @@ public:
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
 	void GetCamPos(float& x, float& y) { x = cam_x; y = cam_y; }
 
-	/*LPSCENE GetCurrentScene() { return scenes[current_scene]; }*/
+	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
 	void Load(LPCWSTR gameFile);
-	/*void SwitchScene();*/
-	/*void InitiateSwitchScene(int scene_id);*/
+	void SwitchScene();
+	void InitiateSwitchScene(int scene_id);
 
 	void _ParseSection_TEXTURES(string line);
 

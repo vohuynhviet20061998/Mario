@@ -6,8 +6,8 @@
 
 
 #include "Textures.h"
-//#include "Animations.h"
-//#include "PlayScene.h"
+#include "Animations.h"
+#include "PlayScene.h"
 
 CGame* CGame::__instance = NULL;
 
@@ -382,53 +382,53 @@ void CGame::InitKeyboard()
 	DebugOut(L"[INFO] Keyboard has been initialized successfully\n");
 }
 
-//void CGame::ProcessKeyboard()
-//{
-//	HRESULT hr;
-//
-//	// Collect all key states first
-//	hr = didv->GetDeviceState(sizeof(keyStates), keyStates);
-//	if (FAILED(hr))
-//	{
-//		// If the keyboard lost focus or was not acquired then try to get control back.
-//		if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
-//		{
-//			HRESULT h = didv->Acquire();
-//			if (h == DI_OK)
-//			{
-//				DebugOut(L"[INFO] Keyboard re-acquired!\n");
-//			}
-//			else return;
-//		}
-//		else
-//		{
-//			//DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
-//			return;
-//		}
-//	}
-//
-//	keyHandler->KeyState((BYTE*)&keyStates);
-//
-//	// Collect all buffered events
-//	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
-//	hr = didv->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), keyEvents, &dwElements, 0);
-//	if (FAILED(hr))
-//	{
-//		DebugOut(L"[ERROR] DINPUT::GetDeviceData failed. Error: %d\n", hr);
-//		return;
-//	}
-//
-//	// Scan through all buffered events, check if the key is pressed or released
-//	for (DWORD i = 0; i < dwElements; i++)
-//	{
-//		int KeyCode = keyEvents[i].dwOfs;
-//		int KeyState = keyEvents[i].dwData;
-//		if ((KeyState & 0x80) > 0)
-//			keyHandler->OnKeyDown(KeyCode);
-//		else
-//			keyHandler->OnKeyUp(KeyCode);
-//	}
-//}
+void CGame::ProcessKeyboard()
+{
+	HRESULT hr;
+
+	// Collect all key states first
+	hr = didv->GetDeviceState(sizeof(keyStates), keyStates);
+	if (FAILED(hr))
+	{
+		// If the keyboard lost focus or was not acquired then try to get control back.
+		if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
+		{
+			HRESULT h = didv->Acquire();
+			if (h == DI_OK)
+			{
+				DebugOut(L"[INFO] Keyboard re-acquired!\n");
+			}
+			else return;
+		}
+		else
+		{
+			//DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
+			return;
+		}
+	}
+
+	keyHandler->KeyState((BYTE*)&keyStates);
+
+	// Collect all buffered events
+	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
+	hr = didv->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), keyEvents, &dwElements, 0);
+	if (FAILED(hr))
+	{
+		DebugOut(L"[ERROR] DINPUT::GetDeviceData failed. Error: %d\n", hr);
+		return;
+	}
+
+	// Scan through all buffered events, check if the key is pressed or released
+	for (DWORD i = 0; i < dwElements; i++)
+	{
+		int KeyCode = keyEvents[i].dwOfs;
+		int KeyState = keyEvents[i].dwData;
+		if ((KeyState & 0x80) > 0)
+			keyHandler->OnKeyDown(KeyCode);
+		else
+			keyHandler->OnKeyUp(KeyCode);
+	}
+}
 
 #define MAX_GAME_LINE 1024
 
@@ -458,8 +458,8 @@ void CGame::_ParseSection_SCENES(string line)
 	int id = atoi(tokens[0].c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[1]);   // file: ASCII format (single-byte char) => Wide Char
 
-	/*LPSCENE scene = new CPlayScene(id, path);
-	scenes[id] = scene;*/
+	LPSCENE scene = new CPlayScene(id, path);
+	scenes[id] = scene;
 }
 
 /*
@@ -508,30 +508,30 @@ void CGame::Load(LPCWSTR gameFile)
 
 	DebugOut(L"[INFO] Loading game file : %s has been loaded successfully\n", gameFile);
 
-	/*SwitchScene();*/
+	SwitchScene();
 }
 
-//void CGame::SwitchScene()
-//{
-//	if (next_scene < 0 || next_scene == current_scene) return;
-//
-//	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
-//
-//	scenes[current_scene]->Unload();
-//
-//	CSprites::GetInstance()->Clear();
-//	CAnimations::GetInstance()->Clear();
-//
-//	current_scene = next_scene;
-//	LPSCENE s = scenes[next_scene];
-//	this->SetKeyHandler(s->GetKeyEventHandler());
-//	s->Load();
-//}
+void CGame::SwitchScene()
+{
+	if (next_scene < 0 || next_scene == current_scene) return;
 
-//void CGame::InitiateSwitchScene(int scene_id)
-//{
-//	next_scene = scene_id;
-//}
+	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
+
+	scenes[current_scene]->Unload();
+
+	CSprites::GetInstance()->Clear();
+	CAnimations::GetInstance()->Clear();
+
+	current_scene = next_scene;
+	LPSCENE s = scenes[next_scene];
+	this->SetKeyHandler(s->GetKeyEventHandler());
+	s->Load();
+}
+
+void CGame::InitiateSwitchScene(int scene_id)
+{
+	next_scene = scene_id;
+}
 
 
 void CGame::_ParseSection_TEXTURES(string line)
