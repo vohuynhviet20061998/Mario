@@ -486,15 +486,22 @@ void CGame::Load(LPCWSTR gameFile)
 			continue;
 		}
 
+		if (line == "[TEXTURES]") { section = GAME_FILE_SECTION_TEXTURES; continue; }
+
 		if (line[0] == '[') {
 			section = GAME_FILE_SECTION_UNKNOWN;
 			continue;
 		}
 
+
+
 		switch (section)
 		{
 		case GAME_FILE_SECTION_SETTINGS:
 			_ParseSection_SETTINGS(line);
+			break;
+		case GAME_FILE_SECTION_TEXTURES: 
+			_ParseSection_TEXTURES(line); 
 			break;
 		}
 	}

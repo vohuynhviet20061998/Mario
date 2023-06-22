@@ -8,8 +8,8 @@
 #include "Game.h"
 //#include "GameObject.h"
 //#include "Textures.h"
-//#include "Animation.h"
-//#include "Animations.h"
+#include "Animation.h"
+#include "Animations.h"
 //
 //#include "Mario.h"
 //#include "Brick.h"
@@ -57,7 +57,7 @@ void Update(DWORD dt)
 */
 void Render()
 {
-	/*CGame* g = CGame::GetInstance();
+	CGame* g = CGame::GetInstance();
 
 	ID3D10Device* pD3DDevice = g->GetDirect3DDevice();
 	IDXGISwapChain* pSwapChain = g->GetSwapChain();
@@ -71,10 +71,10 @@ void Render()
 	FLOAT NewBlendFactor[4] = { 0,0,0,0 };
 	pD3DDevice->OMSetBlendState(g->GetAlphaBlending(), NewBlendFactor, 0xffffffff);
 
-	CGame::GetInstance()->GetCurrentScene()->Render();
+	/*CGame::GetInstance()->GetCurrentScene()->Render();*/
 
 	spriteHandler->End();
-	pSwapChain->Present(0, 0);*/
+	pSwapChain->Present(0, 0);
 }
 
 HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int ScreenHeight)
@@ -151,8 +151,8 @@ int Run()
 		{
 			frameStart = now;
 
-			/*CGame::GetInstance()->ProcessKeyboard();
-			Update(dt);*/
+			/*CGame::GetInstance()->ProcessKeyboard();*/
+			Update(dt);
 			Render();
 
 			/*CGame::GetInstance()->SwitchScene();*/
