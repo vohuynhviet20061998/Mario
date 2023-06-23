@@ -7,7 +7,7 @@
 #include "Animation.h"
 #include "Animations.h"
 #include "Sprites.h"
-//#include "Collision.h"
+#include "Collision.h"
 
 using namespace std;
 
@@ -47,7 +47,7 @@ public:
 
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
-	virtual void Update(DWORD dt/*, vector<LPGAMEOBJECT>* coObjects = NULL*/) {};
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL) {};
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
 
@@ -60,14 +60,14 @@ public:
 	virtual void OnNoCollision(DWORD dt) {};
 
 	// When collision with an object has been detected (triggered by CCollision::Process)
-	//virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};
 
 	// Is this object blocking other object? If YES, collision framework will automatically push the other object
 	virtual int IsBlocking() { return 1; }
 
 	~CGameObject();
 
-	/*static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }*/
+	static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }
 };
 
 class CGameObject;
