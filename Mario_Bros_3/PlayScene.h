@@ -2,8 +2,9 @@
 #include "Game.h"
 #include "Textures.h"
 #include "Scene.h"
-//#include "GameObject.h"
-//#include "Brick.h"
+#include "GameObject.h"
+#include "Brick.h"
+#include "Utils.h"
 //#include "Mario.h"
 //#include "Goomba.h"
 //#include "Koopas.h"
@@ -13,9 +14,9 @@ class CPlayScene : public CScene
 {
 protected:
 	// A play scene has to have player, right? 
-	/*LPGAMEOBJECT player;
+	/*LPGAMEOBJECT player;*/
 
-	vector<LPGAMEOBJECT> objects;*/
+	vector<LPGAMEOBJECT> objects;
 
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
@@ -38,7 +39,7 @@ public:
 	void Clear();
 	void PurgeDeletedObjects();
 
-	/*static bool IsGameObjectDeleted(const LPGAMEOBJECT& o);*/
+	static bool IsGameObjectDeleted(const LPGAMEOBJECT& o);
 };
 
 typedef CPlayScene* LPPLAYSCENE;

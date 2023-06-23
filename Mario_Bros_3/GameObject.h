@@ -69,3 +69,6 @@ public:
 
 	/*static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }*/
 };
+
+class CGameObject;
+typedef CGameObject* LPGAMEOBJECT;

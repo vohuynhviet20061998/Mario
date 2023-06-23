@@ -524,7 +524,7 @@ void CGame::SwitchScene()
 
 	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
 
-	/*scenes[current_scene]->Unload();*/
+	scenes[current_scene]->Unload();
 
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();

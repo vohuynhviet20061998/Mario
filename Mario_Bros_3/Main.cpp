@@ -12,7 +12,7 @@
 #include "Animations.h"
 //
 //#include "Mario.h"
-//#include "Brick.h"
+#include "Brick.h"
 //#include "Goomba.h"
 //#include "Coin.h"
 //#include "Platform.h"
@@ -155,7 +155,7 @@ int Run()
 			Update(dt);
 			Render();
 
-			CGame::GetInstance()->SwitchScene();
+			/*CGame::GetInstance()->SwitchScene();*/
 		}
 		else
 			Sleep(tickPerFrame - dt);
@@ -180,7 +180,7 @@ int WINAPI WinMain(
 
 
 	//IMPORTANT: this is the only place where a hardcoded file name is allowed ! 
-	game->Load(L"./Resource/Game-start.txt");
+	game->Load(L"Game-start.txt");
 
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 
