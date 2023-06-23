@@ -18,7 +18,7 @@ using namespace std;
 CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
-	/*player = NULL;*/
+	player = NULL;
 	key_handler = new CSampleKeyHandler(this);
 }
 
@@ -106,7 +106,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	/*case OBJECT_TYPE_MARIO:
+	case OBJECT_TYPE_MARIO:
 		if (player != NULL)
 		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
@@ -117,7 +117,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
-	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;*/
+	/*case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;*/
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
 	/*case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
@@ -251,19 +251,19 @@ void CPlayScene::Update(DWORD dt)
 	}*/
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
-	/*if (player == NULL) return;*/
+	if (player == NULL) return;
 
 	// Update camera to follow mario
-	//float cx, cy;
-	//player->GetPosition(cx, cy);
+	float cx, cy;
+	player->GetPosition(cx, cy);
 
-	//CGame* game = CGame::GetInstance();
-	//cx -= game->GetBackBufferWidth() / 2;
-	//cy -= game->GetBackBufferHeight() / 2;
+	CGame* game = CGame::GetInstance();
+	cx -= game->GetBackBufferWidth() / 2;
+	cy -= game->GetBackBufferHeight() / 2;
 
-	//if (cx < 0) cx = 0;
+	if (cx < 0) cx = 0;
 
-	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 
 	PurgeDeletedObjects();
 }
@@ -299,7 +299,7 @@ void CPlayScene::Unload()
 		delete objects[i];
 
 	objects.clear();
-	/*player = NULL;*/
+	player = NULL;
 
 	DebugOut(L"[INFO] Scene %d unloaded! \n", id);
 }

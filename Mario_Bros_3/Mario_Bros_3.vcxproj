@@ -144,6 +144,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="KeyEventHandler.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mario.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="KeyEventHandler.h" />
+    <ClInclude Include="Mario.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />

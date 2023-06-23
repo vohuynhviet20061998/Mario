@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "Brick.h"
 #include "Utils.h"
-//#include "Mario.h"
+#include "Mario.h"
 //#include "Goomba.h"
 //#include "Koopas.h"
 
@@ -14,7 +14,7 @@ class CPlayScene : public CScene
 {
 protected:
 	// A play scene has to have player, right? 
-	/*LPGAMEOBJECT player;*/
+	LPGAMEOBJECT player;
 
 	vector<LPGAMEOBJECT> objects;
 
@@ -34,7 +34,7 @@ public:
 	virtual void Render();
 	virtual void Unload();
 
-	/*LPGAMEOBJECT GetPlayer() { return player; }*/
+	LPGAMEOBJECT GetPlayer() { return player; }
 
 	void Clear();
 	void PurgeDeletedObjects();
