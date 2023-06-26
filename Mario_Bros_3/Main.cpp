@@ -6,7 +6,7 @@
 
 #include "debug.h"
 #include "Game.h"
-//#include "GameObject.h"
+#include "GameObject.h"
 #include "Textures.h"
 #include "Animation.h"
 #include "Animations.h"
@@ -15,14 +15,14 @@
 #include "Brick.h"
 //#include "Goomba.h"
 //#include "Coin.h"
-//#include "Platform.h"
+#include "Platform.h"
 //
 #include "SampleKeyEventHandler.h"
 //
-//#include "AssetIDs.h"
+#include "AssetIDs.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"04 - Collision"
+#define MAIN_WINDOW_TITLE L"Mario Bros 3"
 #define WINDOW_ICON_PATH L"./Resource/mario.ico"
 
 #define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255, 0.0f)

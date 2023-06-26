@@ -7,13 +7,15 @@ height	240
 # type: 0: intro, 1: play scene 
 [SCENES]
 0	intro.txt
-1	scene01.txt
-2	scene02.txt
-5	scene0005.txt
+1	Resource\Scenes\scene01.txt
+2	Resource\Scenes\scene02.txt
+5	.\Resource\Scenes\scene0005.txt
 
 # id	file 
 [TEXTURES]
--100	bbox.png
-0	mario.png
-10	enemies.png
-20	misc.png
+-100	./Resource/Textures/bbox.png
+0	./Resource/Textures/mario.png
+10	./Resource/Textures/enemies.png
+20	./Resource/Textures/misc.png
+30	./Resource/Textures/tileset.png
+40	./Resource/Textures/world-1-1.png

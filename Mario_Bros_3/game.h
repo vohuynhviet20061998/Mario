@@ -17,7 +17,6 @@ using namespace std;
 #define MAX_FRAME_RATE 100
 #define KEYBOARD_BUFFER_SIZE 1024
 #define KEYBOARD_STATE_SIZE 256
-#define MAX_GAME_LINE 1024
 
 
 

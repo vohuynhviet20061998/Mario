@@ -4,8 +4,7 @@
 #include "debug.h"
 #include "Utils.h"
 
-
-#include "Textures.h"
+#include "Texture.h"
 #include "Animations.h"
 #include "PlayScene.h"
 
@@ -209,7 +208,7 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 	sprite.TextureIndex = 0;
 
 	// The color to apply to this sprite, full color applies white.
-	sprite.ColorModulate = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	//sprite.ColorModulate = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	sprite.ColorModulate = D3DXCOLOR(1.0f, 1.0f, 1.0f, alpha);
 
 
@@ -402,7 +401,7 @@ void CGame::ProcessKeyboard()
 		}
 		else
 		{
-			DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
+			//DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
 			return;
 		}
 	}
@@ -469,49 +468,42 @@ void CGame::Load(LPCWSTR gameFile)
 {
 	DebugOut(L"[INFO] Start loading game file : %s\n", gameFile);
 
-	ifstream readFile;
-	readFile.open(gameFile);
-
-	
+	ifstream f;
+	f.open(gameFile);
 	char str[MAX_GAME_LINE];
 
+	// current resource section flag
 	int section = GAME_FILE_SECTION_UNKNOWN;
-	
-	while (readFile.getline(str, MAX_GAME_LINE)) {
+
+	while (f.getline(str, MAX_GAME_LINE))
+	{
 		string line(str);
-		if (line[0] == '#') continue;
 
-		if (line == "[SETTINGS]") {
-			section = GAME_FILE_SECTION_SETTINGS; 
-			continue;
-		}
+		if (line[0] == '#') continue;	// skip comment lines	
 
-
-
+		if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
 		if (line == "[TEXTURES]") { section = GAME_FILE_SECTION_TEXTURES; continue; }
-
 		if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
-
-		if (line[0] == '[') {
+		if (line[0] == '[')
+		{
 			section = GAME_FILE_SECTION_UNKNOWN;
+			DebugOut(L"[ERROR] Unknown section: %s\n", ToLPCWSTR(line));
 			continue;
 		}
 
-
-
+		//
+		// data section
+		//
 		switch (section)
 		{
-		case GAME_FILE_SECTION_SETTINGS:
-			_ParseSection_SETTINGS(line);
-			break;
-		case GAME_FILE_SECTION_TEXTURES: 
-			_ParseSection_TEXTURES(line); 
-			break;
-		case GAME_FILE_SECTION_SCENES: 
-			_ParseSection_SCENES(line); 
-			break;
+		case GAME_FILE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
+		case GAME_FILE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
+		case GAME_FILE_SECTION_SCENES:
+			_ParseSection_SCENES(line); break;
+
 		}
 	}
+	f.close();
 
 	DebugOut(L"[INFO] Loading game file : %s has been loaded successfully\n", gameFile);
 
