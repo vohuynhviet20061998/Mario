@@ -31,6 +31,15 @@ protected:
 	bool isDeleted;
 
 public:
+	void set_X(float x) {
+		this->x = x;
+	}
+	float get_X() { return this->x; }
+	void set_Y(float y) {
+		this->y = y;
+	}
+	float get_Y() { return this->y; }
+
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float& x, float& y) { x = this->x; y = this->y; }
@@ -68,6 +77,7 @@ public:
 	~CGameObject();
 
 	static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }
+	virtual void Release() = 0;
 };
 
 class CGameObject;

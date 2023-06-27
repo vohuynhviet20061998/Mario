@@ -28,6 +28,10 @@ void CPlatform::RenderBoundingBox()
 	CGame::GetInstance()->Draw(xx - cx, y - cy, bbox, nullptr, BBOX_ALPHA, rect.right - 1, rect.bottom - 1);
 }
 
+void CPlatform::Release()
+{
+}
+
 void CPlatform::Render()
 {
 	if (this->length <= 0) return;

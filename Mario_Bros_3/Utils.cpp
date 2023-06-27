@@ -2,6 +2,11 @@
 
 #include "Utils.h"
 
+namespace GlobalUtil {
+
+	LPD3DX10SPRITE spriteObject = NULL;
+}
+
 vector<string> split(string line, string delimeter)
 {
 	vector<string> tokens;
