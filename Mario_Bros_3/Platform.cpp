@@ -46,7 +46,7 @@ void CPlatform::Render()
 		xx += this->cellWidth;
 	}
 	if (length > 1)
-		s->Get(this->spriteIdEnd)->Draw(xx, y);
+		s->Get(this->spriteIdMiddle)->Draw(xx, y);
 
 	RenderBoundingBox();
 }

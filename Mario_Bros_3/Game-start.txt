@@ -19,3 +19,4 @@ height	240
 20	./Resource/Textures/misc.png
 30	./Resource/Textures/tileset.png
 40	./Resource/Textures/world-1-1.png
+50	./Resource/Textures/masks.png

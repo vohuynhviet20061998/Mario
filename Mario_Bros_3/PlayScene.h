@@ -7,6 +7,7 @@
 #include "Utils.h"
 #include "Mario.h"
 #include "camera.h"
+#include "background.h"
 //#include "Goomba.h"
 //#include "Koopas.h"
 
@@ -16,6 +17,7 @@ class CPlayScene : public CScene
 protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
+	LPBackground _background;
 
 	vector<LPGAMEOBJECT> objects;
 
@@ -24,6 +26,7 @@ protected:
 
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
+	void _ParseSection_BACKGROUND(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
 

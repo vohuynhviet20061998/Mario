@@ -32,3 +32,4 @@ public:
 
 	void Release() ;
 };
+typedef Background* LPBackground;

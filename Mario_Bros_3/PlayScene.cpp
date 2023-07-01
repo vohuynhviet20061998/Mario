@@ -10,6 +10,7 @@
 //#include "Coin.h"
 #include "Platform.h"
 
+
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
 
@@ -26,6 +27,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
+#define SCENE_SECTION_BACKGROUND 3
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
@@ -129,12 +131,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int length = atoi(tokens[5].c_str());
 		int sprite_begin = atoi(tokens[6].c_str());
 		int sprite_middle = atoi(tokens[7].c_str());
-		int sprite_end = atoi(tokens[8].c_str());
+		
 
 		obj = new CPlatform(
 			x, y,
 			cell_width, cell_height, length,
-			sprite_begin, sprite_middle, sprite_end
+			sprite_begin, sprite_middle
 		);
 
 		break;
@@ -160,6 +162,35 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 
 	objects.push_back(obj);
+}
+
+void CPlayScene::_ParseSection_BACKGROUND(string line)
+{
+	std::vector<std::string> tokens =split(line);
+
+	if (tokens.size() == 1) {
+		unsigned int textureID = std::stoul(tokens.at(0));
+		LPTEXTURE tex = CTextures::GetInstance()->Get(textureID);
+
+		_background = new Background(tex);
+		return;
+	}
+
+	if (tokens.size() < 6) {
+		return;
+	}
+
+	RECT spriteBound;
+	spriteBound.left = std::stoul(tokens.at(0));
+	spriteBound.top = std::stoul(tokens.at(1));
+	spriteBound.right = std::stoul(tokens.at(2));
+	spriteBound.bottom = std::stoul(tokens.at(3));
+
+	float x = std::stof(tokens.at(4));
+	float y = std::stof(tokens.at(5));
+	D3DXVECTOR2 position = D3DXVECTOR2(x, y);
+
+	_background->AddSprite(spriteBound, position);
 }
 
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
@@ -215,6 +246,7 @@ void CPlayScene::Load()
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+		if (line == "[BACKGROUND]") { section = SCENE_SECTION_BACKGROUND; continue; };
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
@@ -226,6 +258,8 @@ void CPlayScene::Load()
 			_ParseSection_ASSETS(line); break;
 		case SCENE_SECTION_OBJECTS: 
 			_ParseSection_OBJECTS(line); break;
+		case SCENE_SECTION_BACKGROUND:
+			_ParseSection_BACKGROUND(line); break;
 		}
 	}
 
