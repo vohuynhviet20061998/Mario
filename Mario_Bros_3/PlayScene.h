@@ -17,16 +17,15 @@ class CPlayScene : public CScene
 protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
-	LPBackground _background;
 
 	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> objects_NoCollision;
 
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
 
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
-	void _ParseSection_BACKGROUND(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
 

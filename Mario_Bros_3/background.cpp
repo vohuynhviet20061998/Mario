@@ -1,102 +1,62 @@
-#include "Utils.h"
-#include "Game.h"
-#include "Camera.h"
-#include "Background.h"
+#include "background.h"
 
-CTexture* Background::_backgroundTexture = nullptr;
+#include "Sprite.h"
+#include "Sprites.h"
 
-bool Background::_IsInViewport(std::pair<RECT, D3DXVECTOR2> sprite, RECTF viewport) {
-	float spriteWidth = sprite.second.x + sprite.first.right;
-	float spriteHeight = sprite.second.y + sprite.first.bottom;
-	if (spriteWidth >= viewport.left &&
-		spriteHeight >= viewport.top &&
-		sprite.second.x <= viewport.right &&
-		sprite.second.y <= viewport.bottom)
+#include "Textures.h"
+
+void CBackground::RenderBoundingBox()
+{
+	D3DXVECTOR3 p(x, y, 0);
+	RECT rect;
+
+	LPTEXTURE bbox = CTextures::GetInstance()->Get(ID_TEX_BBOX);
+
+	float l, t, r, b;
+
+	GetBoundingBox(l, t, r, b);
+	rect.left = 0;
+	rect.top = 0;
+	rect.right = (int)r - (int)l;
+	rect.bottom = (int)b - (int)t;
+
+	float cx, cy;
+	CGame::GetInstance()->GetCamPos(cx, cy);
+
+	float xx = x - this->cellWidth / 2 + rect.right / 2;
+
+	CGame::GetInstance()->Draw(xx - cx, y - cy, bbox, nullptr, BBOX_ALPHA, rect.right - 1, rect.bottom - 1);
+}
+
+void CBackground::Release()
+{
+}
+
+void CBackground::Render()
+{
+	if (this->length <= 0) return;
+	float xx = x;
+	CSprites* s = CSprites::GetInstance();
+
+	s->Get(this->spriteIdBegin)->Draw(xx, y);
+	xx += this->cellWidth;
+	for (int i = 1; i < this->length - 1; i++)
 	{
-		return true;
+
+		s->Get(this->spriteIdMiddle)->Draw(xx, y);
+		xx += this->cellWidth;
 	}
+	if (length > 1)
+		s->Get(this->spriteIdMiddle)->Draw(xx, y);
 
-	return false;
+	RenderBoundingBox();
 }
 
-void Background::_ScaleSprite(const RECT& spriteBound) {
-	_sprite.TexCoord.x = spriteBound.left / static_cast<float>(_backgroundTexture->getWidth());
-	_sprite.TexCoord.y = spriteBound.top / static_cast<float>(_backgroundTexture->getHeight());
-
-	int spriteWidth = spriteBound.right - spriteBound.left;
-	int spriteHeight = spriteBound.bottom - spriteBound.top;
-	_sprite.TexSize.x = spriteWidth / static_cast<float>(_backgroundTexture->getWidth());
-	_sprite.TexSize.y = spriteHeight / static_cast<float>(_backgroundTexture->getHeight());
-	_sprite.ColorModulate = { 1.0f, 1.0f, 1.0f, 1.0f };
-	_sprite.TextureIndex = 0;
-
-	D3DXMatrixScaling(&_scaleMatrix, static_cast<float>(spriteWidth), static_cast<float>(spriteHeight), 1.0f);
-}
-
-Background::Background(CTexture*& backgroundTexture) {
-	if (_backgroundTexture == nullptr) {
-		_backgroundTexture = backgroundTexture;
-
-		_sprite.pTexture = backgroundTexture->getShaderResourceView();
-	}
-}
-
-Background::~Background() {}
-
-void Background::AddSprite(RECT spriteBound, D3DXVECTOR2 position) {
-	_sprites.emplace_back(std::make_pair(spriteBound, position));
-}
-
-void Background::Update() {
-	_activeSprites.clear();
-
-	for (const auto& sprite : _sprites) {
-		if (_IsInViewport(sprite, Camera::GetInstance()->GetViewport())) {
-			_activeSprites.emplace_back(sprite);
-		}
-	}
-}
-
-void Background::Render()
+void CBackground::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	for (const auto& sprite : _activeSprites) {
-		float x = sprite.second.x - Camera::GetInstance()->get_X();
-		float y = (CGame::GetInstance()->GetBackBufferHeight() - sprite.second.y) + Camera::GetInstance()->get_Y();
-		D3DXVECTOR2 spritePosition = { floor(x), floor(y) };
-
-		_ScaleSprite(sprite.first);
-
-		D3DXMATRIX translationMatrix;
-		D3DXMatrixTranslation(&translationMatrix, spritePosition.x, spritePosition.y, 0.1f);
-		_sprite.matWorld = _scaleMatrix * translationMatrix;
-
-		GlobalUtil::spriteObject->DrawSpritesImmediate(&_sprite, 1, 0, 0);
-	}
-}
-
-void Background::BruteForceRender() {
-	for (const auto& sprite : _sprites) {
-		float x = sprite.second.x - Camera::GetInstance()->get_X();
-		float y = (CGame::GetInstance()->GetBackBufferHeight() - sprite.second.y) + Camera::GetInstance()->get_Y();
-		D3DXVECTOR2 spritePosition = { floor(x), floor(y) };
-
-		_ScaleSprite(sprite.first);
-
-		D3DXMATRIX translationMatrix;
-		D3DXMatrixTranslation(&translationMatrix, spritePosition.x, spritePosition.y, 0.1f);
-		_sprite.matWorld = _scaleMatrix * translationMatrix;
-
-		GlobalUtil::spriteObject->DrawSpritesImmediate(&_sprite, 1, 0, 0);
-	}
-}
-
-void Background::GetBoundingBox(float& l, float& t, float& r, float& b)
-{
-}
-
-void Background::Release() {
-	_activeSprites.clear();
-	_sprites.clear();
-	_sprite.pTexture = nullptr;
-	_backgroundTexture = nullptr;
+	float cellWidth_div_2 = this->cellWidth / 2;
+	l = x - cellWidth_div_2;
+	t = y - this->cellHeight / 2;
+	r = l + this->cellWidth * this->length;
+	b = t + this->cellHeight;
 }

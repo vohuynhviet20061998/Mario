@@ -105,6 +105,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	float y = (float)atof(tokens[2].c_str());
 
 	CGameObject* obj = NULL;
+	CGameObject* obj_NoCollision = NULL;
+	
 
 	switch (object_type)
 	{
@@ -141,6 +143,23 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		break;
 	}
+	case OBJECT_TYPE_BACKGROUD:
+	{
+		float cell_width = (float)atof(tokens[3].c_str());
+		float cell_height = (float)atof(tokens[4].c_str());
+		int length = atoi(tokens[5].c_str());
+		int sprite_begin = atoi(tokens[6].c_str());
+		int sprite_middle = atoi(tokens[7].c_str());
+
+
+		
+		obj_NoCollision = new CBackground(
+			x, y,
+			cell_width, cell_height, length,
+			sprite_begin, sprite_middle
+		);
+		break;
+	}
 
 	/*case OBJECT_TYPE_PORTAL:
 	{
@@ -158,39 +177,19 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 
 	// General object setup
-	obj->SetPosition(x, y);
+	if (obj != NULL) {
+		obj->SetPosition(x, y);
+		objects.push_back(obj);
+	}
+	if (obj_NoCollision != NULL) {
+		obj_NoCollision->SetPosition(x, y);
+		objects_NoCollision.push_back(obj_NoCollision);
 
-
-	objects.push_back(obj);
-}
-
-void CPlayScene::_ParseSection_BACKGROUND(string line)
-{
-	std::vector<std::string> tokens =split(line);
-
-	if (tokens.size() == 1) {
-		unsigned int textureID = std::stoul(tokens.at(0));
-		LPTEXTURE tex = CTextures::GetInstance()->Get(textureID);
-
-		_background = new Background(tex);
-		return;
 	}
 
-	if (tokens.size() < 6) {
-		return;
-	}
-
-	RECT spriteBound;
-	spriteBound.left = std::stoul(tokens.at(0));
-	spriteBound.top = std::stoul(tokens.at(1));
-	spriteBound.right = std::stoul(tokens.at(2));
-	spriteBound.bottom = std::stoul(tokens.at(3));
-
-	float x = std::stof(tokens.at(4));
-	float y = std::stof(tokens.at(5));
-	D3DXVECTOR2 position = D3DXVECTOR2(x, y);
-
-	_background->AddSprite(spriteBound, position);
+	
+	
+	
 }
 
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
@@ -246,7 +245,6 @@ void CPlayScene::Load()
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
-		if (line == "[BACKGROUND]") { section = SCENE_SECTION_BACKGROUND; continue; };
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
@@ -258,8 +256,6 @@ void CPlayScene::Load()
 			_ParseSection_ASSETS(line); break;
 		case SCENE_SECTION_OBJECTS: 
 			_ParseSection_OBJECTS(line); break;
-		case SCENE_SECTION_BACKGROUND:
-			_ParseSection_BACKGROUND(line); break;
 		}
 	}
 
@@ -304,8 +300,15 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
-	for (int i = 0; i < objects.size(); i++)
+	for (int i = 0; i < objects_NoCollision.size(); i++) {
+		objects_NoCollision[i]->Render();
+	}
+	for (int i = 0; i < objects.size(); i++) {
+
 		objects[i]->Render();
+	}
+		
+	
 }
 
 /*
@@ -319,6 +322,12 @@ void CPlayScene::Clear()
 		delete (*it);
 	}
 	objects.clear();
+	vector<LPGAMEOBJECT>::iterator it1;
+	for (it1 = objects_NoCollision.begin(); it1 != objects_NoCollision.end(); it1++)
+	{
+		delete (*it1);
+	}
+	objects_NoCollision.clear();
 }
 
 /*
@@ -333,6 +342,10 @@ void CPlayScene::Unload()
 		delete objects[i];
 
 	objects.clear();
+	for (int i = 0; i < objects_NoCollision.size(); i++)
+		delete objects_NoCollision[i];
+
+	objects_NoCollision.clear();
 	player = NULL;
 
 	DebugOut(L"[INFO] Scene %d unloaded! \n", id);
@@ -358,4 +371,5 @@ void CPlayScene::PurgeDeletedObjects()
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), CPlayScene::IsGameObjectDeleted),
 		objects.end());
+	
 }
