@@ -7,8 +7,6 @@
 65000	51	102	66	117	30
 66000	68	102	83	117	30
 67000	85	68	100	83	30
-#tree_small
-68000	85	85	100	100	30
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
