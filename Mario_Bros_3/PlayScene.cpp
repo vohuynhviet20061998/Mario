@@ -123,7 +123,21 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
 	/*case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;*/
-	case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
+	case OBJECT_TYPE_BRICK: {
+		float cell_width = (float)atof(tokens[3].c_str());
+		float cell_height = (float)atof(tokens[4].c_str());
+		int length = atoi(tokens[5].c_str());
+		int sprite_begin = atoi(tokens[6].c_str());
+
+
+		obj = new CBrick(
+			x, y,
+			cell_width, cell_height, length,
+			sprite_begin
+		);
+
+		break;
+	}
 	/*case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
 	case OBJECT_TYPE_PLATFORM:
