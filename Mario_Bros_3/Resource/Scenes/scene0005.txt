@@ -3,7 +3,9 @@
 Resource\Objects\brick.txt
 Resource\Objects\mario.txt
 Resource\Objects\floor.txt
-Resource\Objects\background.txt
+Resource\Objects\background_tree.txt
+Resource\Objects\background_cloud.txt
+
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -85,5 +87,20 @@ Resource\Objects\background.txt
 6	2418	28	16	16	1	63000	63000
 6	2434	28	16	16	2	65000	62000
 6	2418	12	16	16	2	61000	62000
+#cloud1
+6	712	256	16	16	2	71000	72000
+6	744	256	16	16	2	72000	73000
+6	712	272	16	16	2	74000	75000
+6	744	272	16	16	2	75000	76000
+#cloud2
+6	320	224	16	16	2	71000	72000
+6	352	224	16	16	1	73000	73000
+6	320	240	16	16	2	73000	74000
+6	352	240	16	16	1	75000	75000
+#cloud3
+6	736	288	16	16	4	71000	72000
+6	800	288	16	16	1	73000	73000
+6	736	304	16	16	4	74000	75000
+6	800	304	16	16	1	75000	75000
 
 
