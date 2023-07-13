@@ -7,12 +7,14 @@ Resource\Objects\background_tree.txt
 Resource\Objects\background_cloud.txt
 Resource\Objects\pipe.txt
 Resource\Objects\box.txt
+Resource\Objects\coin.txt
 
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas
 # See OBJECT_TYPE constants in AssetIDs.h
+
 
 #box1
 
@@ -211,5 +213,5 @@ Resource\Objects\box.txt
 #brick4
 1	2256	92	16	16	2	21000
 1	2256	44	16	16	2	21000
-
-
+#coin
+4	160	76

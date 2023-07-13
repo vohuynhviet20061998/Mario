@@ -9,7 +9,7 @@
 #include "pipe.h"
 #include "box.h"
 //#include "Portal.h"
-//#include "Coin.h"
+#include "coin.h"
 #include "Platform.h"
 
 
@@ -75,7 +75,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 {
 	vector<string> tokens = split(line);
 
-	if (tokens.size() < 3) return; // skip invalid lines - an animation must at least has 1 frame and 1 frame time
+	if (tokens.size() < 3) return; 
 
 	DebugOut(L"--> %s\n",ToWSTR(line).c_str());
 
@@ -139,7 +139,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		break;
 	}
-	/*case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
+	case OBJECT_TYPE_COIN: 
+	{
+		obj = new CCoin(x, y); 
+		break;
+	}
 
 	case OBJECT_TYPE_PLATFORM:
 	{

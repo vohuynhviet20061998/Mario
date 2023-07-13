@@ -8,5 +8,3 @@
 66000	68	102	83	117	30
 67000	85	68	100	83	30
 
-# ani_id	sprite1_id	time1	sprite2_id	time2	...
-[ANIMATIONS]

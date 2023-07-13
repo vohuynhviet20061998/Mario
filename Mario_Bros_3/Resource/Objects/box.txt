@@ -41,5 +41,3 @@
 98003	170	153	185	168	30
 99003	187	153	202	168	30
 
-# ani_id	sprite1_id	time1	sprite2_id	time2	...
-[ANIMATIONS]
