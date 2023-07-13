@@ -8,6 +8,32 @@ void CCoin::Render()
 	RenderBoundingBox();
 }
 
+void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	
+	
+	if (GetTickCount64() - time_jump < TIME_JUMP) {
+		this->vy += ay * dt;
+	}
+	else if ((GetTickCount64() - time_jump >= TIME_JUMP) && (GetTickCount64() - time_jump <= TIME_JUMP * 2)) {
+		
+		this->Delete();
+	}
+	else if (GetTickCount64() - time_jump > TIME_JUMP * 2) {
+		SetState(COIN_STATE_IDLE);
+	}
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
+
+
+}
+
+void CCoin::OnNoCollision(DWORD dt)
+{
+	x += vx * dt;
+	y += vy * dt;
+};
+
 void CCoin::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = x - COIN_BBOX_WIDTH / 2;
@@ -21,10 +47,12 @@ void CCoin::SetState(int state)
 	switch (state)
 	{
 	case COIN_STATE_IDLE:
-		nx = 1;
+		this->vy = 0;
+		this->ay = 0;
 		break;
 	case COIN_STATE_JUMP:
-		vy -= COIN_JUMP_Y;
+		this->vy = -COIN_JUMP_Y;
+		time_jump = GetTickCount64();
 		break;
 	}
 }

@@ -93,9 +93,9 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
 	if (e->ny > 0) {
-		e->obj->Delete();
-		coin++;
 
+		e->obj->SetState(COIN_STATE_JUMP);
+		coin++;
 	}
 }
 
