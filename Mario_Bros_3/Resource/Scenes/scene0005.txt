@@ -8,7 +8,7 @@ Resource\Objects\background_cloud.txt
 Resource\Objects\pipe.txt
 Resource\Objects\box.txt
 Resource\Objects\coin.txt
-
+Resource\Objects\powerup.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -231,3 +231,5 @@ Resource\Objects\coin.txt
 10	720	76
 11	1472	92	26000
 10	1472	92
+#powerup
+12	176	76	120000

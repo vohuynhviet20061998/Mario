@@ -14,6 +14,7 @@
 #include"Brick.h"
 #include"Brick_questions.h"
 #include "Brick_emty.h"
+#include "PowerUp.h"
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -153,6 +154,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_COIN: 
 	{
 		obj = new CCoin(x, y); 
+		break;
+	}
+	case OBJECT_TYPE_POWERUP: {
+		int sprite_id = atoi(tokens[3].c_str());
+		obj = new CPowerUp(x, y, sprite_id);
 		break;
 	}
 

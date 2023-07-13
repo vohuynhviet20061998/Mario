@@ -106,7 +106,9 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e)
 {
-	e->obj->Delete();
+	if (e->ny > 0) {
+		e->obj->Delete();
+	}
 }
 
 //void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
