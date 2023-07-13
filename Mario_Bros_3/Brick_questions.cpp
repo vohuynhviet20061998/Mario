@@ -1,10 +1,17 @@
 #include "Brick_questions.h"
 
+
 void CBrick_Questions::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(ID_ANI_Brick_Questions)->Render(x, y);
 	RenderBoundingBox();
+}
+
+void CBrick_Questions::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 void CBrick_Questions::GetBoundingBox(float& l, float& t, float& r, float& b)

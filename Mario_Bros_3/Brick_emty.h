@@ -6,8 +6,8 @@
 #include "Textures.h"
 
 #define Brick_Emty_WIDTH 16
-#define Brick_Emty_BBOX_WIDTH 16
-#define Brick_Emty_BBOX_HEIGHT 16
+#define Brick_Emty_BBOX_WIDTH 14
+#define Brick_Emty_BBOX_HEIGHT 14
 
 class CBrick_Emty : public CGameObject {
 	int spriteId;
