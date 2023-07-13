@@ -217,4 +217,5 @@ Resource\Objects\coin.txt
 4	160	76
 4	224	28
 4	432	44
+10	160	76
 

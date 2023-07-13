@@ -10,7 +10,7 @@
 
 
 #define OBJECT_TYPE_MARIO	0
-#define OBJECT_TYPE_BRICK	1
+#define OBJECT_TYPE_Brick_Questions	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
 #define OBJECT_TYPE_COIN 4
@@ -78,7 +78,7 @@
 
 #pragma endregion 
 
-#define ID_SPRITE_BRICK 20000
+#define ID_SPRITE_Brick_Questions 20000
 
 #define ID_SPRITE_GOOMBA 30000
 #define ID_SPRITE_GOOMBA_WALK (ID_SPRITE_GOOMBA + 1000)

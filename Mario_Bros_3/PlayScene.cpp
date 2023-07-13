@@ -11,7 +11,8 @@
 //#include "Portal.h"
 #include "coin.h"
 #include "Platform.h"
-
+#include"Brick.h"
+#include"Brick_questions.h"
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -137,6 +138,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			sprite_begin
 		);
 
+		break;
+	}
+	case OBJECT_TYPE_BRICK_QUESTIONS: {
+
+		obj = new CBrick_Questions(x, y);
 		break;
 	}
 	case OBJECT_TYPE_COIN: 
