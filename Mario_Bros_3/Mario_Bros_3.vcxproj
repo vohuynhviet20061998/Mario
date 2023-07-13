@@ -141,6 +141,7 @@
     <ClCompile Include="background.cpp" />
     <ClCompile Include="box.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Brick_emty.cpp" />
     <ClCompile Include="Brick_questions.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="coin.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="background.h" />
     <ClInclude Include="box.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Brick_emty.h" />
     <ClInclude Include="Brick_questions.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="coin.h" />

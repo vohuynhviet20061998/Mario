@@ -13,6 +13,7 @@
 #include "Platform.h"
 #include"Brick.h"
 #include"Brick_questions.h"
+#include "Brick_emty.h"
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -141,8 +142,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 	case OBJECT_TYPE_BRICK_QUESTIONS: {
-
 		obj = new CBrick_Questions(x, y);
+		break;
+	}
+	case OBJECT_TYPE_BRICK_EMTY: {
+		int sprite_id = atoi(tokens[3].c_str());
+		obj = new CBrick_Emty(x, y, sprite_id);
 		break;
 	}
 	case OBJECT_TYPE_COIN: 
