@@ -215,3 +215,6 @@ Resource\Objects\coin.txt
 1	2256	44	16	16	2	21000
 #coin
 4	160	76
+4	224	28
+4	432	44
+
