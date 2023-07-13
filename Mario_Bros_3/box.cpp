@@ -15,8 +15,8 @@ void box::RenderBoundingBox()
 	float l, t, r, b;
 
 	GetBoundingBox(l, t, r, b);
-	rect.left = 0;
-	rect.top = 0;
+	rect.left = l;
+	rect.top = t;
 	rect.right = (int)r - (int)l;
 	rect.bottom = (int)b - (int)t;
 
@@ -30,7 +30,7 @@ void box::RenderBoundingBox()
 
 int box::IsDirectionColliable(float nx, float ny)
 {
-	if ((nx == 0 && ny == -1)) return 1;
+	if ((nx == 0 && ny == -1)|| (nx==0 && ny==0)) return 1;
 	else return 0;
 }
 
@@ -60,7 +60,7 @@ void box::Render()
 void box::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	float cellWidth_div_2 = this->cellWidth / 2;
-	l = x - cellWidth_div_2;
+	l = x - cellWidth_div_2	+ 1;
 	t = y - this->cellHeight / 2;
 	r = l + this->cellWidth * this->length;
 	b = t + this->cellHeight;
