@@ -19,6 +19,20 @@ void fireBall::OnNoCollision(DWORD dt)
 	x += vx * dt;
 	y += vy * dt;
 };
+void fireBall::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+
+
+	if (e->ny != 0)
+	{
+		vy = 0;
+	}
+	else if (e->nx != 0)
+	{
+		this->Delete();
+	}
+}
+
 
 void fireBall::SetState(int state)
 {
