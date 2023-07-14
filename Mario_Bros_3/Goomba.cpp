@@ -43,19 +43,12 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		vy = 0;
 	}
-	else if (e->nx != 0)
+	else if (e->nx != 0 )
 	{
 		vx = -vx;
 	}
-	if (dynamic_cast<CCoin*>(e->obj))
-		OnCollisionWithCoin(e);
 }
 
-void CGoomba::OnCollisionWithCoin(LPCOLLISIONEVENT e)
-{
-	e->obj->Delete();
-	this->coin++;
-}
 
 void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {

@@ -75,7 +75,7 @@ Resource\Objects\goomba.txt
 
 #GOOMBA
 2	496	108
-
+2	752	92
 
 
 
