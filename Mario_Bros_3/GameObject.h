@@ -39,6 +39,10 @@ public:
 		this->y = y;
 	}
 	float get_Y() { return this->y; }
+	void set_NX(int nx) {
+		this->nx = nx;
+	}
+	int get_NX() { return this->nx; }
 
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -79,6 +83,8 @@ public:
 
 	static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }
 	virtual void Release() = 0;
+
+
 };
 
 class CGameObject;

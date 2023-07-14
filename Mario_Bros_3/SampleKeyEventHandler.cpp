@@ -5,6 +5,10 @@
 
 #include "Mario.h"
 #include "PlayScene.h"
+#include "fireBall.h"
+#include "GameObject.h"
+
+
 
 void CSampleKeyHandler::OnKeyDown(int KeyCode)
 {
@@ -39,6 +43,8 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
 
 	CMario* mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
+
 	switch (KeyCode)
 	{
 	case DIK_S:
@@ -47,6 +53,27 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 	case DIK_DOWN:
 		mario->SetState(MARIO_STATE_SIT_RELEASE);
 		break;
+	case DIK_D:
+		CGame* game = CGame::GetInstance();
+		fireBall* _fire;
+
+		_fire = new fireBall(mario->get_X(), mario->get_Y());
+
+		if (game->IsKeyDown(DIK_RIGHT)) {
+			_fire->SetSpeed(0.2f, 0);
+		}
+		else if (game->IsKeyDown(DIK_LEFT)) {
+			_fire->SetSpeed(-0.2f, 0);
+		}
+		else if (mario->get_NX() >= 0) {
+			_fire->SetSpeed(0.2f, 0);
+		}
+		else if (mario->get_NX() < 0) {
+			_fire->SetSpeed(-0.2f, 0);
+		}
+		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->set_Objects(_fire);
+		break;
+
 	}
 }
 

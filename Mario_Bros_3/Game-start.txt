@@ -21,3 +21,4 @@ height	240
 40	./Resource/Textures/world-1-1.png
 50	./Resource/Textures/masks.png
 60	./Resource/Textures/items.png
+70	./Resource/Textures/projectiles.png

@@ -16,6 +16,7 @@ class CPlayScene : public CScene
 protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
+	
 
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> objects_NoCollision;
@@ -29,6 +30,10 @@ protected:
 	void LoadAssets(LPCWSTR assetFile);
 
 public:
+	vector<LPGAMEOBJECT> get_Objects() { return objects; }
+	void set_Objects(LPGAMEOBJECT Object) {
+		objects.push_back(Object);
+	}
 	CPlayScene(int id, LPCWSTR filePath);
 
 	virtual void Load();
@@ -37,6 +42,7 @@ public:
 	virtual void Unload();
 
 	LPGAMEOBJECT GetPlayer() { return player; }
+	
 
 	void Clear();
 	void PurgeDeletedObjects();
