@@ -123,14 +123,23 @@ void CMario::OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithPowerup(LPCOLLISIONEVENT e)
 {
 	if (is_Eat) {
-		this->SetLevel(MARIO_LEVEL_BIG);
+		if (level == MARIO_LEVEL_SMALL) {
+			this->SetLevel(MARIO_LEVEL_BIG);
+		}
+		else if (level == MARIO_LEVEL_BIG) {
+			this->SetLevel(MARIO_LEVEL_FIRE);
+		}
 		e->obj->Delete();
 		is_Eat = false;
 	}
 	if (e->ny > 0) {
 		if (!is_Eat) {
+			if (level == MARIO_LEVEL_SMALL) {
 
-			e->obj->SetState(PowerUp_STATE_JUMP);
+				e->obj->SetState(PowerUp_STATE_JUMP);
+				
+			}
+			
 			is_Eat = true;
 		}
 	} 

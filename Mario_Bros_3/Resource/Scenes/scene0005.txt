@@ -11,6 +11,7 @@ Resource\Objects\coin.txt
 Resource\Objects\powerup.txt
 Resource\Objects\fireBall.txt
 Resource\Objects\goomba.txt
+Resource\Objects\leaf.txt
 
 #
 [OBJECTS]
@@ -217,9 +218,13 @@ Resource\Objects\goomba.txt
 1	2256	44	16	16	2	21000
 #powerup
 12	176	76	120000
+13	176	76	120001
 12	240	28	120000
+13	240	28	120001
 12	720	76	120000
+13	720	76	120001
 12	1472	92	120000
+13	1472	92	120001
 #coin
 4	160	76
 11	160	76	26000

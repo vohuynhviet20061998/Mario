@@ -16,6 +16,7 @@
 #include "Brick_emty.h"
 #include "PowerUp.h"
 #include "Goomba.h"
+#include "leaf.h"
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -160,6 +161,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_POWERUP: {
 		int sprite_id = atoi(tokens[3].c_str());
 		obj = new CPowerUp(x, y, sprite_id);
+		break;
+	}
+	case OBJECT_TYPE_LEAF: {
+		int sprite_id = atoi(tokens[3].c_str());
+		obj = new Cleaf(x, y, sprite_id);
 		break;
 	}
 
