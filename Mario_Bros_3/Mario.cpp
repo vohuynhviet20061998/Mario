@@ -7,6 +7,7 @@
 //#include "Goomba.h"
 #include "coin.h"
 #include "Brick_questions.h"
+#include "PowerUp.h"
 //#include "Portal.h"
 //
 #include "Collision.h"
@@ -56,6 +57,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	}
 	if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
+	else if (dynamic_cast<CPowerUp*>(e->obj))
+		OnCollisionWithPowerup(e);
 	
 	//else if (dynamic_cast<CPortal*>(e->obj))
 	//	OnCollisionWithPortal(e);
@@ -109,6 +112,25 @@ void CMario::OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e)
 	if (e->ny > 0) {
 		e->obj->Delete();
 	}
+}
+
+void CMario::OnCollisionWithPowerup(LPCOLLISIONEVENT e)
+{
+	if (e->ny > 0) {
+		if (!is_Eat) {
+
+			e->obj->SetState(PowerUp_STATE_JUMP);
+			is_Eat = true;
+		}
+		else {
+			this->SetLevel(MARIO_LEVEL_BIG);
+			e->obj->Delete();
+			is_Eat = false;
+		}
+		
+	} 
+	
+	
 }
 
 //void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)

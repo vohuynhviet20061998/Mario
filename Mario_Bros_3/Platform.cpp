@@ -51,6 +51,10 @@ void CPlatform::Render()
 	RenderBoundingBox();
 }
 
+void CPlatform::Update(DWORD dt)
+{
+}
+
 void CPlatform::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	float cellWidth_div_2 = this->cellWidth / 2;

@@ -213,6 +213,8 @@ Resource\Objects\powerup.txt
 #brick4
 1	2256	92	16	16	2	21000
 1	2256	44	16	16	2	21000
+#powerup
+12	176	76	120000
 #coin
 4	160	76
 11	160	76	26000
@@ -231,5 +233,3 @@ Resource\Objects\powerup.txt
 10	720	76
 11	1472	92	26000
 10	1472	92
-#powerup
-12	176	76	120000
