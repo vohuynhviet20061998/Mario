@@ -55,24 +55,28 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 		break;
 	case DIK_D:
 		CGame* game = CGame::GetInstance();
-		fireBall* _fire;
+		if (mario->GetLevel() == MARIO_LEVEL_FIRE) {
 
-		_fire = new fireBall(mario->get_X(), mario->get_Y());
+			fireBall* _fire;
 
-		if (game->IsKeyDown(DIK_RIGHT)) {
-			_fire->SetSpeed(0.2f, 0);
+			_fire = new fireBall(mario->get_X(), mario->get_Y());
+
+			if (game->IsKeyDown(DIK_RIGHT)) {
+				_fire->SetSpeed(0.2f, 0);
+			}
+			else if (game->IsKeyDown(DIK_LEFT)) {
+				_fire->SetSpeed(-0.2f, 0);
+			}
+			else if (mario->get_NX() >= 0) {
+				_fire->SetSpeed(0.2f, 0);
+			}
+			else if (mario->get_NX() < 0) {
+				_fire->SetSpeed(-0.2f, 0);
+			}
+			((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->set_Objects(_fire);
+			break;
+
 		}
-		else if (game->IsKeyDown(DIK_LEFT)) {
-			_fire->SetSpeed(-0.2f, 0);
-		}
-		else if (mario->get_NX() >= 0) {
-			_fire->SetSpeed(0.2f, 0);
-		}
-		else if (mario->get_NX() < 0) {
-			_fire->SetSpeed(-0.2f, 0);
-		}
-		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->set_Objects(_fire);
-		break;
 
 	}
 }

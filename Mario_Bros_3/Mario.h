@@ -77,6 +77,28 @@
 
 #define ID_ANI_MARIO_SMALL_JUMP_RUN_RIGHT 1600
 #define ID_ANI_MARIO_SMALL_JUMP_RUN_LEFT 1601
+//fire MARIO
+
+#define ID_ANI_MARIO_FIRE_IDLE_RIGHT 51000
+#define ID_ANI_MARIO_FIRE_IDLE_LEFT 52000
+
+#define ID_ANI_MARIO_FIRE_WALKING_RIGHT 53000
+#define ID_ANI_MARIO_FIRE_WALKING_LEFT 54000
+
+#define ID_ANI_MARIO_FIRE_RUNNING_RIGHT 55000
+#define ID_ANI_MARIO_FIRE_RUNNING_LEFT 56000
+
+#define ID_ANI_MARIO_FIRE_BRACE_RIGHT 57000
+#define ID_ANI_MARIO_FIRE_BRACE_LEFT 58000
+
+#define ID_ANI_MARIO_FIRE_JUMP_WALK_RIGHT 59001
+#define ID_ANI_MARIO_FIRE_JUMP_WALK_LEFT 60001
+
+#define ID_ANI_MARIO_FIRE_JUMP_RUN_RIGHT 59000
+#define ID_ANI_MARIO_FIRE_JUMP_RUN_LEFT 60000
+
+#define ID_ANI_MARIO_FIRE_SIT_RIGHT 61000
+#define ID_ANI_MARIO_FIRE_SIT_LEFT 62000
 
 #pragma endregion
 
@@ -87,6 +109,7 @@
 
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
+#define MARIO_LEVEL_FIRE	3
 
 #define MARIO_BIG_BBOX_WIDTH  14
 #define MARIO_BIG_BBOX_HEIGHT 24
@@ -122,6 +145,7 @@ class CMario : public CGameObject
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
 
 	int GetAniIdBig();
+	int GetAniIdFire();
 	int GetAniIdSmall();
 
 public:
@@ -154,6 +178,9 @@ public:
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 
 	void SetLevel(int l);
+	int GetLevel() {
+		return this->level;
+	}
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
