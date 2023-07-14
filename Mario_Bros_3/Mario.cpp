@@ -12,6 +12,7 @@
 //
 #include "Collision.h"
 #include "Goomba.h"
+#include "leaf.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -55,12 +56,14 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CBrick_Questions*>(e->obj)) {
 		OnCollisionWithBrickQuestions(e);
 	}
-	if (dynamic_cast<CCoin*>(e->obj))
+	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPowerUp*>(e->obj))
 		OnCollisionWithPowerup(e);
 	else if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
+	else if (dynamic_cast<Cleaf*>(e->obj))
+		OnCollisionWithLeaf(e);
 	
 	//else if (dynamic_cast<CPortal*>(e->obj))
 	//	OnCollisionWithPortal(e);
@@ -123,28 +126,36 @@ void CMario::OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithPowerup(LPCOLLISIONEVENT e)
 {
 	if (is_Eat) {
-		if (level == MARIO_LEVEL_SMALL) {
-			this->SetLevel(MARIO_LEVEL_BIG);
-		}
-		else if (level == MARIO_LEVEL_BIG) {
-			this->SetLevel(MARIO_LEVEL_FIRE);
-		}
+		this->SetLevel(MARIO_LEVEL_BIG);
 		e->obj->Delete();
 		is_Eat = false;
 	}
 	if (e->ny > 0) {
 		if (!is_Eat) {
-			if (level == MARIO_LEVEL_SMALL) {
 
-				e->obj->SetState(PowerUp_STATE_JUMP);
-				
-			}
-			
+			e->obj->SetState(PowerUp_STATE_JUMP);
 			is_Eat = true;
 		}
 	} 
 	
 	
+}
+void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
+{
+	if (is_Eat_leaf) {
+		this->SetLevel(MARIO_LEVEL_FIRE);
+		e->obj->Delete();
+		is_Eat_leaf = false;
+	}
+	if (e->ny > 0) {
+		if (!is_Eat_leaf) {
+
+			e->obj->SetState(leaf_STATE_JUMP);
+			is_Eat_leaf = true;
+		}
+	}
+
+
 }
 
 //void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)

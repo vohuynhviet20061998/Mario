@@ -12,9 +12,9 @@
 #define leaf_STATE_JUMP	1
 #define leaf_STATE_WALK	2
 #define leaf_WALK_X	0.05f
-#define leaf_JUMP_Y	0.015f
+#define leaf_JUMP_Y	0.05f
 #define leaf_JUMP_DEFLECT_Y	0.1f
-#define TIME_JUMP	1000
+#define TIME_JUMP	2000
 
 
 class Cleaf : public CGameObject {
@@ -33,6 +33,7 @@ public:
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	void OnNoCollision(DWORD dt);
+	void OnCollisionWith(LPCOLLISIONEVENT e);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void SetState(int state);
 	void Release() {};

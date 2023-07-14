@@ -137,11 +137,13 @@ class CMario : public CGameObject
 	BOOLEAN isOnPlatform;
 	int coin;
 	BOOLEAN is_Eat;
+	BOOLEAN is_Eat_leaf;
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
 	void OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e);
 	void OnCollisionWithPowerup(LPCOLLISIONEVENT e);
+	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
 
 	int GetAniIdBig();

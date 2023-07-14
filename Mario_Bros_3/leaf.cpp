@@ -36,11 +36,27 @@ void Cleaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 
 
+
 void Cleaf::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
-};
+}
+
+void Cleaf::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (e->ny != 0)
+	{
+		vy = leaf_JUMP_DEFLECT_Y;
+	}
+	else
+		if (e->nx != 0)
+		{
+			vx = -vx;
+		}
+
+
+}
 
 
 void Cleaf::GetBoundingBox(float& l, float& t, float& r, float& b)
