@@ -26,6 +26,7 @@ public:
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 	int IsBlocking() { return 0; }
 	int IsCollidable() { return 1; };
+	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void SetState(int state);
 	void Release(){}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);

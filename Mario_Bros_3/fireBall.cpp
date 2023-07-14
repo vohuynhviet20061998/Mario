@@ -1,4 +1,5 @@
 #include "fireBall.h"
+#include "Goomba.h"
 
 void fireBall::Render()
 {
@@ -31,9 +32,14 @@ void fireBall::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		this->Delete();
 	}
+	if (dynamic_cast<CGoomba*>(e->obj))
+		OnCollisionWithGoomba(e);
 }
 
-
+void fireBall::OnCollisionWithGoomba(LPCOLLISIONEVENT e) {
+	if( nx != 0 )
+		e->obj->Delete();
+}
 void fireBall::SetState(int state)
 {
 	switch (state) {
