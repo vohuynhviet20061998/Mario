@@ -15,6 +15,7 @@
 #include"Brick_questions.h"
 #include "Brick_emty.h"
 #include "PowerUp.h"
+#include "Goomba.h"
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -126,7 +127,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
-	/*case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;*/
+	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;
 	case OBJECT_TYPE_BRICK: {
 		float cell_width = (float)atof(tokens[3].c_str());
 		float cell_height = (float)atof(tokens[4].c_str());
