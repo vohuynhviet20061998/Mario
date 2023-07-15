@@ -159,6 +159,7 @@
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="pipe.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
