@@ -1,5 +1,6 @@
 #include "Goomba.h"
 #include "Coin.h"
+#include <cmath>
 
 #include "debug.h"
 
@@ -34,6 +35,7 @@ void CGoomba::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
+	
 };
 
 void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
@@ -57,6 +59,11 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
+
+	if (object == GOOMBA_OBJECT_FLY) {
+		SetState(GOOMBA_STATE_FLY);
+
+	}
 
 	if ((state == GOOMBA_STATE_DIE) && (GetTickCount64() - die_start > GOOMBA_DIE_TIMEOUT))
 	{
@@ -105,5 +112,10 @@ void CGoomba::SetState(int state)
 	case GOOMBA_STATE_WALKING:
 		vx = -GOOMBA_WALKING_SPEED;
 		break;
+	case GOOMBA_STATE_FLY:
+		vy = GOOMBA_FLY_SPEED_Y;
+		break;
 	}
+	
+
 }
