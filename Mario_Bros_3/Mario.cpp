@@ -119,7 +119,7 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e)
 {
-	if (e->ny > 0) {
+	if (e->ny > 0 && e->obj->get_object() == BRICK_OBJECT_QUESTION) {
 		e->obj->Delete();
 	}
 }

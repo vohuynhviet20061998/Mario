@@ -15,7 +15,6 @@
 #define BRICK_OBJECT_TREE	11
 
 class CBrick_Questions : public CGameObject {
-	int object;
 public:
 	CBrick_Questions(float x, float y, int object) : CGameObject(x, y) {
 		this->x = x;

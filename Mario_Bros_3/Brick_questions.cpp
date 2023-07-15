@@ -16,7 +16,6 @@ void CBrick_Questions::Render()
 void CBrick_Questions::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	CGameObject::Update(dt, coObjects);
-	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 void CBrick_Questions::GetBoundingBox(float& l, float& t, float& r, float& b)

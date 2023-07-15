@@ -31,7 +31,10 @@ protected:
 
 	bool isDeleted;
 
+	int object;
+
 public:
+	int get_object() { return this->object; }
 	void set_X(float x) {
 		this->x = x;
 	}
