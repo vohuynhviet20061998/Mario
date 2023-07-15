@@ -17,6 +17,7 @@
 #include "PowerUp.h"
 #include "Goomba.h"
 #include "leaf.h"
+#include "map.h"
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -255,6 +256,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			cell_width, cell_height, length,
 			sprite_begin, sprite_middle, sprite_end
 		);
+		break;
+	}
+
+	case OBJECT_TYPE_MAP: {
+		int sprite_id = atoi(tokens[3].c_str());
+		obj = new CMap(x, y, sprite_id);
 		break;
 	}
 

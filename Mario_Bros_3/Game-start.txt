@@ -1,5 +1,5 @@
 [SETTINGS]
-start	5
+start	2
 width	320
 height	240
 
@@ -22,3 +22,4 @@ height	240
 50	./Resource/Textures/masks.png
 60	./Resource/Textures/items.png
 70	./Resource/Textures/projectiles.png
+80	./Resource/Textures/map.png
