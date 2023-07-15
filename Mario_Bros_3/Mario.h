@@ -193,6 +193,7 @@ public:
 	}
 
 	float get_ay() { return this->ay; }
+	BOOLEAN is_No_Gravity() { return this->is_NO_GRAVITY; }
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);

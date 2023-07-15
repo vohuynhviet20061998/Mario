@@ -4,8 +4,13 @@
 void CBrick_Questions::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
+	if (object == BRICK_OBJECT_QUESTION) {
 	animations->Get(ID_ANI_Brick_Questions)->Render(x, y);
-	RenderBoundingBox();
+	}
+	else if (object == BRICK_OBJECT_TREE) {
+		animations->Get(ID_ANI_Brick_Tree)->Render(x, y);
+		RenderBoundingBox();
+	}
 }
 
 void CBrick_Questions::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

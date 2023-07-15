@@ -4,15 +4,16 @@
 #include "Mario.h"
 #include "Game.h"
 
-//#include "Goomba.h"
+
 #include "coin.h"
 #include "Brick_questions.h"
 #include "PowerUp.h"
-//#include "Portal.h"
-//
+
+
 #include "Collision.h"
 #include "Goomba.h"
 #include "leaf.h"
+#include "Portal.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -65,9 +66,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithGoomba(e);
 	else if (dynamic_cast<Cleaf*>(e->obj))
 		OnCollisionWithLeaf(e);
-	
-	//else if (dynamic_cast<CPortal*>(e->obj))
-	//	OnCollisionWithPortal(e);
+	else if (dynamic_cast<CPortal*>(e->obj))
+		OnCollisionWithPortal(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -159,11 +159,11 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 
 }
 
-//void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
-//{
-//	CPortal* p = (CPortal*)e->obj;
-//	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
-//}
+void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
+{
+	CPortal* p = (CPortal*)e->obj;
+	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
+}
 
 //
 // Get animation ID for small Mario
@@ -454,7 +454,6 @@ void CMario::SetState(int state)
 	case MARIO_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
-		vy = 0.0f;
 		break;
 
 	case MARIO_STATE_DIE:

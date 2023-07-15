@@ -2,6 +2,7 @@
 [ASSETS]
 Resource\Objects\map.txt
 Resource\Objects\mario.txt
+Resource\Objects\brick.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -13,3 +14,15 @@ Resource\Objects\mario.txt
 
 # MARIO
 15	37	54
+
+#portal
+50	68	23	84	39	5
+
+#brick
+16	21	70
+16	37	70
+16	53	70
+16	69	70
+16	85	70
+16	85	54
+16	85	38

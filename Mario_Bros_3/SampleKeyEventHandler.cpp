@@ -32,9 +32,6 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_0:
 		mario->SetState(MARIO_STATE_DIE);
 		break;
-	case DIK_R: // reset
-		//Reload();
-		break;
 	}
 }
 
@@ -100,11 +97,16 @@ void CSampleKeyHandler::KeyState(BYTE* states)
 			mario->SetState(MARIO_STATE_RUNNING_LEFT);
 		else
 			mario->SetState(MARIO_STATE_WALKING_LEFT);
-	}else if (game->IsKeyDown(DIK_UP)) {
-		mario->SetState(MARIO_STATE_WALK_UP);
 	}
-	else if (game->IsKeyDown(DIK_DOWN)) {
-		mario->SetState(MARIO_STATE_WALK_DOWN);
+	else if (mario->is_No_Gravity()) 
+	{
+		if (game->IsKeyDown(DIK_UP)) {
+		mario->SetState(MARIO_STATE_WALK_UP);
+		}
+		else if (game->IsKeyDown(DIK_DOWN)) {
+			mario->SetState(MARIO_STATE_WALK_DOWN);
+		}
+
 	}
 	else
 		mario->SetState(MARIO_STATE_IDLE);
