@@ -33,6 +33,9 @@
 #define MARIO_STATE_SIT				600
 #define MARIO_STATE_SIT_RELEASE		601
 
+#define MARIO_STATE_WALK_UP			700
+#define MARIO_STATE_WALK_DOWN		701
+
 
 #pragma region ANIMATION_ID
 
@@ -77,6 +80,9 @@
 
 #define ID_ANI_MARIO_SMALL_JUMP_RUN_RIGHT 1600
 #define ID_ANI_MARIO_SMALL_JUMP_RUN_LEFT 1601
+
+#define ID_ANI_MARIO_SMALL_WALK_UP 1700
+#define ID_ANI_MARIO_SMALL_WALK_DOWN 1701
 //fire MARIO
 
 #define ID_ANI_MARIO_FIRE_IDLE_RIGHT 51000
@@ -128,6 +134,7 @@ class CMario : public CGameObject
 {
 	BOOLEAN isSitting;
 	float maxVx;
+	float maxVy;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
 
@@ -138,6 +145,9 @@ class CMario : public CGameObject
 	int coin;
 	BOOLEAN is_Eat;
 	BOOLEAN is_Eat_leaf;
+	BOOLEAN is_NO_GRAVITY;
+
+	
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
@@ -164,7 +174,25 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		is_Eat = false;
+		is_NO_GRAVITY = false;
 	}
+	CMario(float x, float y, int ay) : CGameObject(x, y)
+	{
+		isSitting = false;
+		maxVx = 0.0f;
+		ax = 0.0f;
+		this->ay = ay;
+
+		level = MARIO_LEVEL_SMALL;
+		untouchable = 0;
+		untouchable_start = -1;
+		isOnPlatform = false;
+		coin = 0;
+		is_Eat = false;
+		is_NO_GRAVITY = true;
+	}
+
+	float get_ay() { return this->ay; }
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);

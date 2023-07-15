@@ -129,6 +129,18 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
+	case OBJECT_TYPE_MARIO_NO_GRAVITY:
+		if (player != NULL)
+		{
+			DebugOut(L"[ERROR] MARIO object was created before!\n");
+			return;
+		}
+		obj = new CMario(x, y, 0);
+		
+		player = (CMario*)obj;
+
+		DebugOut(L"[INFO] Player object has been created!\n");
+		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;
 	case OBJECT_TYPE_BRICK: {
 		float cell_width = (float)atof(tokens[3].c_str());
