@@ -243,3 +243,7 @@ Resource\Objects\leaf.txt
 10	720	76
 11	1472	92	26000
 10	1472	92
+
+
+#goomba-fly
+17	896	92

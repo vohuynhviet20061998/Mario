@@ -3,11 +3,12 @@
 
 #include "debug.h"
 
-CGoomba::CGoomba(float x, float y) :CGameObject(x, y)
+CGoomba::CGoomba(float x, float y, int object) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = GOOMBA_GRAVITY;
 	die_start = -1;
+	this->object = object;
 	SetState(GOOMBA_STATE_WALKING);
 }
 
@@ -70,7 +71,14 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CGoomba::Render()
 {
-	int aniId = ID_ANI_GOOMBA_WALKING;
+	int aniId;
+	if (object == GOOMBA_OBJECT_NORMAL){
+		aniId = ID_ANI_GOOMBA_WALKING;
+	}
+	else if (object == GOOMBA_OBJECT_FLY)
+	{
+		aniId = ID_ANI_GOOMBA_FLY;
+	}
 	if (state == GOOMBA_STATE_DIE)
 	{
 		aniId = ID_ANI_GOOMBA_DIE;

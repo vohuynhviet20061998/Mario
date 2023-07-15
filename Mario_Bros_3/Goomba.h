@@ -17,6 +17,12 @@
 #define ID_ANI_GOOMBA_WALKING 5000
 #define ID_ANI_GOOMBA_DIE 5001
 
+#define GOOMBA_OBJECT_NORMAL	30
+#define GOOMBA_OBJECT_FLY	40
+
+#define ID_ANI_GOOMBA_FLY_WALK	6001
+#define ID_ANI_GOOMBA_FLY	6002
+
 class CGoomba : public CGameObject
 {
 protected:
@@ -38,7 +44,7 @@ protected:
 
 
 public:
-	CGoomba(float x, float y);
+	CGoomba(float x, float y, int object);
 	void Release() {};
 	virtual void SetState(int state);
 };

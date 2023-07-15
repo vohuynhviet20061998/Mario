@@ -23,3 +23,4 @@ height	240
 60	./Resource/Textures/items.png
 70	./Resource/Textures/projectiles.png
 80	./Resource/Textures/map.png
+90	./Resource/Textures/enemies1.png
