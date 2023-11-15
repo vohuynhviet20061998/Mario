@@ -131,8 +131,8 @@
 #define ID_ANI_MARIO_FLY_RIGHT 85000
 #define ID_ANI_MARIO_FLY_LEFT 86000
 
-#define ID_ANI_MARIO_FIRE_SIT_RIGHT 87000
-#define ID_ANI_MARIO_FIRE_SIT_LEFT 88000
+#define ID_ANI_MARIO_FLY_SIT_RIGHT 87000
+#define ID_ANI_MARIO_FLY_SIT_LEFT 88000
 
 #pragma endregion
 
@@ -144,6 +144,7 @@
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
 #define MARIO_LEVEL_FIRE	3
+#define MARIO_LEVEL_FLY		4
 
 #define MARIO_BIG_BBOX_WIDTH  14
 #define MARIO_BIG_BBOX_HEIGHT 24
@@ -187,7 +188,7 @@ class CMario : public CGameObject
 	int GetAniIdBig();
 	int GetAniIdFire();
 	int GetAniIdSmall();
-
+	int GetAniIdFly();
 public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
