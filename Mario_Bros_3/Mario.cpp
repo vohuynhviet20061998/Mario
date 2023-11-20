@@ -246,20 +246,10 @@ int CMario::GetAniIdFly()
 	int aniId = -1;
 	if (!isOnPlatform)
 	{
-		if (abs(ax) == MARIO_ACCEL_RUN_X)
-		{
-			if (nx >= 0)
-				aniId = ID_ANI_MARIO_FLY_JUMP_RUN_RIGHT;
-			else
-				aniId = ID_ANI_MARIO_FLY_JUMP_RUN_LEFT;
-		}
+		if (nx >= 0)
+			aniId = ID_ANI_MARIO_FLY_RIGHT;
 		else
-		{
-			if (nx >= 0)
-				aniId = ID_ANI_MARIO_FLY_JUMP_WALK_RIGHT;
-			else
-				aniId = ID_ANI_MARIO_FLY_JUMP_WALK_LEFT;
-		}
+			aniId = ID_ANI_MARIO_FLY_LEFT;
 	}
 	else
 		if (isSitting)
@@ -461,7 +451,7 @@ void CMario::SetState(int state)
 		maxVx = -MARIO_RUNNING_SPEED;
 		ax = -MARIO_ACCEL_RUN_X;
 		nx = -1;
-		
+
 		break;
 	case MARIO_STATE_WALKING_RIGHT:
 		if (isSitting) break;
@@ -530,6 +520,11 @@ void CMario::SetState(int state)
 		ay = 0;
 		ny = 1;
 		vy = MARIO_WALKING_SPEED;
+		break;
+	case MARIO_STATE_FLY:
+		if (abs(this->vx) == MARIO_WALKING_SPEED)
+			vy = -MARIO_JUMP_SPEED_Y;
+		else vy = -MARIO_JUMP_RUN_SPEED_Y;
 		break;
 	}
 

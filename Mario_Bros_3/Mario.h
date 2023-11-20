@@ -36,6 +36,8 @@
 #define MARIO_STATE_WALK_UP			700
 #define MARIO_STATE_WALK_DOWN		701
 
+#define MARIO_STATE_FLY		800
+
 
 #pragma region ANIMATION_ID
 
@@ -197,7 +199,7 @@ public:
 		ax = 0.0f;
 		ay = MARIO_GRAVITY;
 
-		level = MARIO_LEVEL_SMALL;
+		level = MARIO_LEVEL_FLY;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;

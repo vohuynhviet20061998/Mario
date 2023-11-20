@@ -21,7 +21,12 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		mario->SetState(MARIO_STATE_SIT);
 		break;
 	case DIK_S:
-		mario->SetState(MARIO_STATE_JUMP);
+		if (mario->GetLevel() == MARIO_LEVEL_FLY) 
+			mario->SetState(MARIO_STATE_FLY);
+		else {
+			mario->SetState(MARIO_STATE_JUMP);
+		}
+		
 		break;
 	case DIK_1:
 		mario->SetLevel(MARIO_LEVEL_SMALL);
@@ -31,24 +36,6 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		break;
 	case DIK_0:
 		mario->SetState(MARIO_STATE_DIE);
-		break;
-	}
-}
-
-void CSampleKeyHandler::OnKeyUp(int KeyCode)
-{
-	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
-
-	CMario* mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
-
-
-	switch (KeyCode)
-	{
-	case DIK_S:
-		mario->SetState(MARIO_STATE_RELEASE_JUMP);
-		break;
-	case DIK_DOWN:
-		mario->SetState(MARIO_STATE_SIT_RELEASE);
 		break;
 	case DIK_D:
 		CGame* game = CGame::GetInstance();
@@ -74,6 +61,24 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 			break;
 
 		}
+	}
+}
+
+void CSampleKeyHandler::OnKeyUp(int KeyCode)
+{
+	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
+
+	CMario* mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
+
+	switch (KeyCode)
+	{
+	case DIK_S:
+		mario->SetState(MARIO_STATE_RELEASE_JUMP);
+		break;
+	case DIK_DOWN:
+		mario->SetState(MARIO_STATE_SIT_RELEASE);
+		break;
 
 	}
 }
