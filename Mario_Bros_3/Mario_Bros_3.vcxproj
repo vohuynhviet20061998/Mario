@@ -148,6 +148,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="fireBall.cpp" />
+    <ClCompile Include="FLowers.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="fireBall.h" />
+    <ClInclude Include="FLowers.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
