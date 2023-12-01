@@ -2,10 +2,16 @@
 #include "GameObject.h"
 
 #define FLOWER_BBOX_WIDTH 16
-#define FLOWER_BBOX_HEIGHT 28
+#define FLOWER_BBOX_HEIGHT 32
 
 
-#define ID_ANI_FLOWER	2000
+#define ID_ANI_FLOWER_IDLE	2000
+#define ID_ANI_FLOWER_DOWN	2001
+#define ID_ANI_FLOWER_UP	2002
+
+#define FLOWER_STATE_IDLE	100
+#define FLOWER_STATE_DOWN	200
+#define FLOWER_STATE_UP		300
 
 class Flowers : public CGameObject
 {

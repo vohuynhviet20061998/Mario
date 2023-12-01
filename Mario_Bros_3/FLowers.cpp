@@ -53,9 +53,20 @@ void Flowers::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void Flowers::Render()
 {
-	
+	CAnimations* animations = CAnimations::GetInstance();
+	int ID_ANI = -1;
 
-	CAnimations::GetInstance()->Get(ID_ANI_FLOWER)->Render(x, y);
+	if (state == FLOWER_STATE_IDLE) {
+		ID_ANI = ID_ANI_FLOWER_IDLE;
+	}
+	else if (state == FLOWER_STATE_DOWN) {
+		ID_ANI = ID_ANI_FLOWER_DOWN;
+	}
+	else if (state == FLOWER_STATE_UP) {
+		ID_ANI = ID_ANI_FLOWER_UP;
+	}
+
+	animations->Get(ID_ANI)->Render(x, y);
 	RenderBoundingBox();
 
 
@@ -63,6 +74,18 @@ void Flowers::Render()
 
 void Flowers::SetState(int state)
 {
-
+	switch (state) {
+	case FLOWER_STATE_IDLE:
+		vx = 0;
+		vy = -1;
+		ny = 1;
+		break;
+	case FLOWER_STATE_DOWN:
+	case FLOWER_STATE_UP:
+		vx = 0;
+		vy = 0;
+		ny = 0;
+		break;
+	}
 
 }
