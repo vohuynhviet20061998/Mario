@@ -12,6 +12,7 @@ Resource\Objects\powerup.txt
 Resource\Objects\fireBall.txt
 Resource\Objects\goomba.txt
 Resource\Objects\leaf.txt
+Resource\Objects\flowers.txt
 
 #
 [OBJECTS]
@@ -75,9 +76,7 @@ Resource\Objects\leaf.txt
 
 # MARIO
 0	120	10
-#GOOMBA
-2	496	108
-2	752	92
+
 #Platform
 5	0	140	16	16	40	51000	52000
 5	640	124	16	16	29	51000	52000
@@ -216,30 +215,5 @@ Resource\Objects\leaf.txt
 #brick4
 1	2256	92	16	16	2	21000
 1	2256	44	16	16	2	21000
-#powerup
-12	176	76	120000
-13	240	28	120001
-12	720	76	120000
-12	1472	92	120000
-#coin
-4	160	76
-11	160	76	26000
-10	160	76
-11	176	76	26000
-10	176	76
-4	224	28
-11	224	28	26000
-10	224	28
-11	240	28	26000
-10	240	28
-4	432	44
-11	432	44	26000
-10	432	44
-11	720	76	26000
-10	720	76
-11	1472	92	26000
-10	1472	92
 
 
-#goomba-fly
-17	896	92

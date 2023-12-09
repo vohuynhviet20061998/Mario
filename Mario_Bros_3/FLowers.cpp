@@ -6,19 +6,24 @@
 
 Flowers::Flowers(float x, float y, int object) :CGameObject(x, y)
 {
+
 	this->ax = 0;
 	this->ay = 0;
 	die_start = -1;
 	this->object = object;
+	SetState(FLOWER_STATE_IDLE);
 }
 
 void Flowers::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	left = x - FLOWER_BBOX_WIDTH / 2;
+	top = y - FLOWER_BBOX_HEIGHT / 2;
+	right = left + FLOWER_BBOX_WIDTH;
+	bottom = top + FLOWER_BBOX_HEIGHT;
 }
 
 void Flowers::OnNoCollision(DWORD dt)
 {
-	x += vx * dt;
 	y += vy * dt;
 
 };

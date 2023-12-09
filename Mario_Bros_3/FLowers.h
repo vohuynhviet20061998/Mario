@@ -13,6 +13,7 @@
 #define FLOWER_STATE_DOWN	200
 #define FLOWER_STATE_UP		300
 
+
 class Flowers : public CGameObject
 {
 protected:
