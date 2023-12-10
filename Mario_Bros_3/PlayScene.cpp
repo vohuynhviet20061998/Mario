@@ -16,9 +16,11 @@
 #include "Brick_emty.h"
 #include "PowerUp.h"
 #include "Goomba.h"
+#include "ParaGoomba.h"
 #include "leaf.h"
 #include "map.h"
 #include "FLowers.h"
+
 
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
@@ -143,7 +145,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y, GOOMBA_OBJECT_NORMAL); break;
-	case OBJECT_TYPE_GOOMBA_FLY: obj = new CGoomba(x, y, GOOMBA_OBJECT_FLY); break;
+	case OBJECT_TYPE_PARAGOOMBA: obj = new CParaGoomba(x, y); break;
+	//case OBJECT_TYPE_GOOMBA_FLY: obj = new CGoomba(x, y, GOOMBA_OBJECT_FLY); break;
 	case OBJECT_TYPE_BRICK: {
 		float cell_width = (float)atof(tokens[3].c_str());
 		float cell_height = (float)atof(tokens[4].c_str());
@@ -161,10 +164,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 	}
 
-	case OBJECT_TYPE_FLOWER_VENUS: {
-		obj = new Flowers(x, y, FLOWER_STATE_IDLE); 
-		break; 
-	}
+	//case OBJECT_TYPE_FLOWER_VENUS: {
+	//	obj = new Flowers(x, y, ID_ANI_FLOWER_IDLE);
+	//	break; 
+	//}
 	case OBJECT_TYPE_BRICK_QUESTIONS: {
 		obj = new CBrick_Questions(x, y, BRICK_OBJECT_QUESTION);
 		break;

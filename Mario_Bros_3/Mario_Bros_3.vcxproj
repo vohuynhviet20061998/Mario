@@ -157,6 +157,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="ParaGoomba.cpp" />
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayScene.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="leaf.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="ParaGoomba.h" />
     <ClInclude Include="pipe.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlayScene.h" />
