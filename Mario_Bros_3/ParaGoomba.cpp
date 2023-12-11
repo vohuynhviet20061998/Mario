@@ -9,16 +9,27 @@ CParaGoomba::CParaGoomba(float x, float y) :CGameObject(x, y)
 	isOnPlatform = false;
 	level = PARAGOOMBA_LEVEL_WALK_FLY;
 	isCollision = true;
+	isBack = false;
 	start_y = y;
 	start_x = x;
+	die_start = -1;
 }
 
 void CParaGoomba::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	if (state == PARAGOOMBA_STATE_DIE)
+	{
+		left = x - PARAGOOMBA_BBOX_WIDTH / 2;
+		top = y - PARAGOOMBA_BBOX_HEIGHT_DIE / 2;
+		right = left + PARAGOOMBA_BBOX_WIDTH;
+		bottom = top + PARAGOOMBA_BBOX_HEIGHT_DIE;
+	}
+	else {
 		left = x - PARAGOOMBA_BBOX_WIDTH / 2;
 		top = y - PARAGOOMBA_BBOX_HEIGHT / 2;
 		right = left + PARAGOOMBA_BBOX_WIDTH;
 		bottom = top + PARAGOOMBA_BBOX_HEIGHT;
+	}
 }
 
 void CParaGoomba::OnNoCollision(DWORD dt)
@@ -61,7 +72,11 @@ void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			jumpTime = PARAGOOMBA_FLY_TIMES;
 		}
 	}
-
+	if ((state == PARAGOOMBA_STATE_DIE) && (GetTickCount64() - die_start > PARAGOOMBA_DIE_TIMEOUT))
+	{
+		isDeleted = true;
+		return;
+	}
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -81,6 +96,9 @@ void CParaGoomba::Render()
 			aniId = ID_ANI_PARAGOOMBA_FLY;
 	}
 	else if (level == PARAGOOMBA_LEVEL_NO_WALK_FLY) {
+		if (state == PARAGOOMBA_STATE_DIE)
+			aniId = ID_ANI_PARAGOOMBA_DIE;
+		else
 			aniId = ID_ANI_PARAGOOMBA_NORMAL;
 	}
 
@@ -96,6 +114,13 @@ void CParaGoomba::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
+	case PARAGOOMBA_STATE_DIE:
+		die_start = GetTickCount64();
+		y += (PARAGOOMBA_BBOX_HEIGHT - PARAGOOMBA_BBOX_HEIGHT_DIE) / 2;
+		vx = 0;
+		vy = 0;
+		ay = 0;
+		break;
 	case PARAGOOMBA_STATE_FLY:
 		jumpTime--;
 		isOnPlatform = false;

@@ -14,6 +14,7 @@
 #include "Goomba.h"
 #include "leaf.h"
 #include "Portal.h"
+#include "ParaGoomba.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -68,6 +69,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithLeaf(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
+	else if (dynamic_cast<CParaGoomba*>(e->obj))
+		OnCollisionWithParaGoomba(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -163,6 +166,57 @@ void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
 	CPortal* p = (CPortal*)e->obj;
 	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
 }
+
+void CMario::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
+{
+	CParaGoomba* paragoomba = dynamic_cast<CParaGoomba*>(e->obj);
+	if (e->ny < 0)
+	{
+		if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE) {
+			if (paragoomba->Getlevel() != PARAGOOMBA_LEVEL_WALK_FLY)
+			{
+				paragoomba->Setlevel(PARAGOOMBA_LEVEL_WALK_FLY);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+				StartUntouchable();
+			}
+			else {
+				paragoomba->SetState(PARAGOOMBA_STATE_DIE);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+			}
+		}
+
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE)
+			{
+				CollisionEffect();
+			}
+		}
+	}
+}
+
+void CMario::CollisionEffect()
+{
+	if (level > MARIO_LEVEL_BIG)
+	{
+		level = MARIO_LEVEL_BIG;
+		StartUntouchable();
+	}
+	else if ((level > MARIO_LEVEL_SMALL))
+	{
+		level = MARIO_LEVEL_SMALL;
+		StartUntouchable();
+	}
+	else
+	{
+		DebugOut(L">>> Mario DIE >>> \n");
+		SetState(MARIO_STATE_DIE);
+	}
+}
+
 
 //
 // Get animation ID for small Mario

@@ -187,6 +187,10 @@ class CMario : public CGameObject
 	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
 
+	void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
+
+	void CollisionEffect();
+
 	int GetAniIdBig();
 	int GetAniIdFire();
 	int GetAniIdSmall();

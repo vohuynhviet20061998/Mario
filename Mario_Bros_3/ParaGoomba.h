@@ -16,6 +16,7 @@
 #define PARAGOOMBA_DIE_TIMEOUT 500
 
 #define PARAGOOMBA_STATE_WALK_FLY 100
+#define PARAGOOMBA_STATE_DIE 200
 #define PARAGOOMBA_STATE_NORMAL 300
 #define PARAGOOMBA_STATE_FLY 400
 #define PARAGOOMBA_STATE_KICK_BY_RACCOON 500
@@ -48,12 +49,14 @@ protected:
 	CMario* mario = NULL;
 	BOOLEAN isOnPlatform;
 	BOOLEAN isCollision ;
+	BOOLEAN isBack ;
 
 	int jumpTime;
 	float walkingTime;
 	float reset_time;
 	float start_x;
 	float start_y;
+	float die_start;
 
 
 	int level;
