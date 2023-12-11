@@ -5,28 +5,20 @@ CParaGoomba::CParaGoomba(float x, float y) :CGameObject(x, y)
 	this->ax = 0;
 	vx = PARAGOOMBA_WALKING_SPEED;
 	this->ay = PARAGOOMBA_GRAVITY;
+	jumpTime = PARAGOOMBA_FLY_TIMES;
 	isOnPlatform = false;
-	level = PARAGOOMBA_LEVEL_WING;
-	die_start = -1;
-
+	level = PARAGOOMBA_LEVEL_WALK_FLY;
+	isCollision = true;
+	start_y = y;
+	start_x = x;
 }
 
 void CParaGoomba::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == PARAGOOMBA_STATE_DIE)
-	{
-		left = x - PARAGOOMBA_BBOX_WIDTH / 2;
-		top = y - PARAGOOMBA_BBOX_HEIGHT_DIE / 2;
-		right = left + PARAGOOMBA_BBOX_WIDTH;
-		bottom = top + PARAGOOMBA_BBOX_HEIGHT_DIE;
-	}
-	else
-	{
 		left = x - PARAGOOMBA_BBOX_WIDTH / 2;
 		top = y - PARAGOOMBA_BBOX_HEIGHT / 2;
 		right = left + PARAGOOMBA_BBOX_WIDTH;
 		bottom = top + PARAGOOMBA_BBOX_HEIGHT;
-	}
 }
 
 void CParaGoomba::OnNoCollision(DWORD dt)
@@ -55,19 +47,19 @@ void CParaGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 
 
+
 void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
-	if (level == PARAGOOMBA_LEVEL_WING) {
-		if (isOnPlatform == true ) {
+	if (level == PARAGOOMBA_LEVEL_WALK_FLY) {
+		if (isOnPlatform == true && jumpTime > 0) {
 			SetState(PARAGOOMBA_STATE_FLY);
 		}
-	}
-	if ((state == PARAGOOMBA_STATE_DIE) && (GetTickCount64() - die_start > PARAGOOMBA_DIE_TIMEOUT))
-	{
-		isDeleted = true;
-		return;
+		if (GetTickCount64() - walkingTime > PARAGOOMBA_WALK_TIME && walkingTime > 0) {
+			walkingTime = 0;
+			jumpTime = PARAGOOMBA_FLY_TIMES;
+		}
 	}
 
 
@@ -81,17 +73,14 @@ void CParaGoomba::Render()
 	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
 
-	if (level == PARAGOOMBA_LEVEL_WING) {
+	if (level == PARAGOOMBA_LEVEL_WALK_FLY) {
 		if (isOnPlatform == true) {
 			aniId = ID_ANI_PARAGOOMBA_WALK_FLY;
 		}
 		else
 			aniId = ID_ANI_PARAGOOMBA_FLY;
 	}
-	else if (level == PARAGOOMBA_LEVEL_NO_WING) {
-		if (state == PARAGOOMBA_STATE_DIE)
-			aniId = ID_ANI_PARAGOOMBA_DIE;
-		else
+	else if (level == PARAGOOMBA_LEVEL_NO_WALK_FLY) {
 			aniId = ID_ANI_PARAGOOMBA_NORMAL;
 	}
 
@@ -107,16 +96,24 @@ void CParaGoomba::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case PARAGOOMBA_STATE_DIE:
-		die_start = GetTickCount64();
-		y += (PARAGOOMBA_BBOX_HEIGHT - PARAGOOMBA_BBOX_HEIGHT_DIE) / 2;
-		vx = 0;
-		vy = 0;
-		ay = 0;
-		break;
 	case PARAGOOMBA_STATE_FLY:
-
-		vy = -PARAGOOMBA_JUMP_LOW_SPEED;
+		jumpTime--;
+		isOnPlatform = false;
+		if (jumpTime == 0) {
+			vy = -PARAGOOMBA_JUMP_HIGH_SPEED;
+			vx = -PARAGOOMBA_WALKING_SPEED;
+			StartWalkingTime();
+		}
+		else
+		{
+			vy = -PARAGOOMBA_JUMP_LOW_SPEED;
+		}
+		break;
+	case PARAGOOMBA_STATE_KICK_BY_RACCOON:
+		vy = -PARAGOOMBA_KICK_BY_RACCOON_SPEED;
+		break;
+	case PARAGOOMBA_STATE_KICK_BY_KOOPA:
+		vy = -PARAGOOMBA_KICK_BY_KOOPA_SPEED;
 		break;
 	}
 }
