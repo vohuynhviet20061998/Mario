@@ -12,7 +12,7 @@ CParaGoomba::CParaGoomba(float x, float y) :CGameObject(x, y)
 	isBack = false;
 	start_y = y;
 	start_x = x;
-	die_start = -1;
+	isfinddropdirection = 0;
 }
 
 void CParaGoomba::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -57,6 +57,19 @@ void CParaGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 
 }
 
+void CParaGoomba::startfinddropdirecttion()
+{
+	float x_mario, y_mario;
+	mario->GetPosition(x_mario, y_mario);
+
+	if (x_mario < x) {
+		nx = -1;
+	}
+	else if (x_mario > x) {
+		nx = 1;
+	}
+	isfinddropdirection = 1;
+}
 
 
 void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -77,6 +90,7 @@ void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isDeleted = true;
 		return;
 	}
+
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -134,11 +148,13 @@ void CParaGoomba::SetState(int state)
 			vy = -PARAGOOMBA_JUMP_LOW_SPEED;
 		}
 		break;
-	case PARAGOOMBA_STATE_KICK_BY_RACCOON:
-		vy = -PARAGOOMBA_KICK_BY_RACCOON_SPEED;
-		break;
-	case PARAGOOMBA_STATE_KICK_BY_KOOPA:
-		vy = -PARAGOOMBA_KICK_BY_KOOPA_SPEED;
-		break;
-	}
+	case PARAGOOMBA_STATE_NORMAL:
+		if (nx == 1) {
+			vx = PARAGOOMBA_WALKING_SPEED;
+		}
+		else if (nx == -1) {
+			vx = -PARAGOOMBA_WALKING_SPEED;
+		}
+		vy = PARAGOOMBA_GRAVITY;
+	}	
 }

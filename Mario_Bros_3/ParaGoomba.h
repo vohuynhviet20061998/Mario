@@ -11,7 +11,7 @@
 
 #define PARAGOOMBA_BBOX_WIDTH 20
 #define PARAGOOMBA_BBOX_HEIGHT 24
-#define PARAGOOMBA_BBOX_HEIGHT_DIE 16
+#define PARAGOOMBA_BBOX_HEIGHT_DIE 7
 
 #define PARAGOOMBA_DIE_TIMEOUT 500
 
@@ -19,8 +19,7 @@
 #define PARAGOOMBA_STATE_DIE 200
 #define PARAGOOMBA_STATE_NORMAL 300
 #define PARAGOOMBA_STATE_FLY 400
-#define PARAGOOMBA_STATE_KICK_BY_RACCOON 500
-#define PARAGOOMBA_STATE_KICK_BY_KOOPA 600
+
 
 #define PARAGOOMBA_LEVEL_WALK_FLY 1
 #define PARAGOOMBA_LEVEL_NO_WALK_FLY 2
@@ -50,6 +49,7 @@ protected:
 	BOOLEAN isOnPlatform;
 	BOOLEAN isCollision ;
 	BOOLEAN isBack ;
+	BOOLEAN isfinddropdirection;
 
 	int jumpTime;
 	float walkingTime;
@@ -65,7 +65,7 @@ protected:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 
-	virtual int IsCollidable() { return (state != PARAGOOMBA_STATE_KICK_BY_RACCOON && state != PARAGOOMBA_STATE_KICK_BY_KOOPA && isCollision != false); };
+	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
 
@@ -76,5 +76,6 @@ public:
 	void StartWalkingTime() { walkingTime = GetTickCount64(); };
 	int Getlevel() { return this->level; }
 	void Setlevel(int level) { this->level = level; };
+	void startfinddropdirecttion();
 	void Release() {};
 };

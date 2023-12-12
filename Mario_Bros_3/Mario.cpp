@@ -71,6 +71,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithPortal(e);
 	else if (dynamic_cast<CParaGoomba*>(e->obj))
 		OnCollisionWithParaGoomba(e);
+
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -173,9 +174,10 @@ void CMario::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 	if (e->ny < 0)
 	{
 		if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE) {
-			if (paragoomba->Getlevel() != PARAGOOMBA_LEVEL_WALK_FLY)
+			if (paragoomba->Getlevel() == PARAGOOMBA_LEVEL_WALK_FLY)
 			{
-				paragoomba->Setlevel(PARAGOOMBA_LEVEL_WALK_FLY);
+				paragoomba->Setlevel(PARAGOOMBA_LEVEL_NO_WALK_FLY);
+				paragoomba->SetState(PARAGOOMBA_STATE_NORMAL);
 				vy = -MARIO_JUMP_DEFLECT_SPEED;
 				StartUntouchable();
 			}
