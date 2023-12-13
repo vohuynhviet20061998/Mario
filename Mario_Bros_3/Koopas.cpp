@@ -1,4 +1,5 @@
 #include "Koopas.h"
+#include "Goomba.h"
 #include "PlayScene.h"
 
 LPGAME game = CGame::GetInstance();
@@ -8,6 +9,7 @@ CKoopas::CKoopas(float x, float y) :CGameObject(x, y)
 	this->ay = KOOPAS_GRAVITY;
 	die_start = -1;
 	SetState(KOOPAS_STATE_WALKING);
+	mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 }
 
 void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -48,7 +50,6 @@ void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		vx = -vx;
 	}
-	
 
 }
 
