@@ -13,6 +13,7 @@ Resource\Objects\fireBall.txt
 Resource\Objects\goomba.txt
 Resource\Objects\leaf.txt
 Resource\Objects\ParaGoomba.txt
+Resource\Objects\Koopas.txt
 
 #
 [OBJECTS]
@@ -76,11 +77,9 @@ Resource\Objects\ParaGoomba.txt
 
 # MARIO
 0	120	10
-#GOOMBA
-2	496	108
 
-#paraGommba
-19	512	107
+#Koopas
+20	496	108
 #Platform
 5	0	140	16	16	40	51000	52000
 5	640	124	16	16	29	51000	52000

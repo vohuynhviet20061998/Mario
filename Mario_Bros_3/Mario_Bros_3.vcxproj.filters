@@ -123,6 +123,9 @@
     <ClCompile Include="ParaGoomba.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Koopas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -228,6 +231,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParaGoomba.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

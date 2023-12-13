@@ -20,6 +20,7 @@
 #include "leaf.h"
 #include "map.h"
 #include "FLowers.h"
+#include "Koopas.h"
 
 
 #include "SampleKeyEventHandler.h"
@@ -146,7 +147,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y, GOOMBA_OBJECT_NORMAL); break;
 	case OBJECT_TYPE_PARAGOOMBA: obj = new CParaGoomba(x, y); break;
-	//case OBJECT_TYPE_GOOMBA_FLY: obj = new CGoomba(x, y, GOOMBA_OBJECT_FLY); break;
+	case OBJECT_TYPE_KOOPAS:obj = new CKoopas(x, y); break;
+
 	case OBJECT_TYPE_BRICK: {
 		float cell_width = (float)atof(tokens[3].c_str());
 		float cell_height = (float)atof(tokens[4].c_str());
