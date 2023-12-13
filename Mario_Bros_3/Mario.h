@@ -177,8 +177,11 @@ class CMario : public CGameObject
 	BOOLEAN is_Eat;
 	BOOLEAN is_Eat_leaf;
 	BOOLEAN is_NO_GRAVITY;
+	BOOLEAN isPickup;
 
 	
+
+	void OnCollisionWithKoopas(LPCOLLISIONEVENT e);
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);

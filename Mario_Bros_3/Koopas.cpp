@@ -64,12 +64,8 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 
 
-	if ((state == KOOPAS_STATE_DIE) && (GetTickCount64() - die_start > KOOPAS_DIE_TIMEOUT) && isHandled != true)
-	{
-		SetState(KOOPAS_STATE_WAKING);
-		startWakingTime();
-	}
-	else if (state == KOOPAS_STATE_WAKING && (GetTickCount64() - waking_start > KOOPAS_WAKING_TIMEOUT)) {
+	
+	if (state == KOOPAS_STATE_WAKING && (GetTickCount64() - waking_start > KOOPAS_WAKING_TIMEOUT)) {
 		SetState(KOOPAS_STATE_WALKING);
 		waking_start = 0;
 	}
@@ -117,7 +113,7 @@ void CKoopas::SetState(int state)
 		if (waking_start > 0) {
 			y -= (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2;
 		}
-		vx = -KOOPAS_WALKING_SPEED;
+		vx = KOOPAS_WALKING_SPEED;
 		break;
 	case KOOPAS_STATE_SLIDE:
 		ay = KOOPAS_GRAVITY;
@@ -125,4 +121,3 @@ void CKoopas::SetState(int state)
 
 	}
 }
-
