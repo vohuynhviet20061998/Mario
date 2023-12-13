@@ -100,15 +100,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 			{
 				CollisionEffect();
 			}
-			/*else {
-				if (game->IsKeyDown(DIK_A) && (game->IsKeyDown(DIK_RIGHT) || game->IsKeyDown(DIK_LEFT))) {
-					koopas->HandledByMario();
-					isPickup = true;
-				}
-				else
-					koopas->SetState(KOOPAS_STATE_SLIDE);
-				StartUntouchable();
-			}*/
+
 		}
 	}
 }
