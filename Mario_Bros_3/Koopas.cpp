@@ -2,6 +2,7 @@
 #include "Goomba.h"
 #include "PlayScene.h"
 
+
 LPGAME game = CGame::GetInstance();
 CKoopas::CKoopas(float x, float y) :CGameObject(x, y)
 {
