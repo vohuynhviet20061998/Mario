@@ -29,6 +29,12 @@
 #define MARIO_SMALL_HANDLED_WIDTH 23
 #define MARIO_SMALL_HANDLED_HEIGHT 2
 
+#define MARIO_BIG_HANDLED_WIDTH 20
+#define MARIO_BIG_HANDLED_HEIGHT 10
+
+#define MARIO_RACCOON_HANDLED_WIDTH 35
+#define MARIO_RACCOON_HANDLED_HEIGHT 10
+
 class CKoopas : public CGameObject
 {
 protected:
@@ -56,5 +62,8 @@ public:
 	CKoopas(float x, float y);
 	virtual void SetState(int state);
 	void startWakingTime() { waking_start = GetTickCount64(); }
+	void HandledByMario();
+	void HandledByMarioRelease();
+	void setPositionByHandle();
 	void Release() {};
 };

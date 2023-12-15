@@ -21,8 +21,8 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		mario->SetState(MARIO_STATE_SIT);
 		break;
 	case DIK_S:
-		if (mario->GetLevel() == MARIO_LEVEL_FLY) 
-			mario->SetState(MARIO_STATE_FLY);
+		if (mario->GetLevel() == MARIO_LEVEL_RACCOON) 
+			mario->SetState(MARIO_STATE_RACCOON);
 		else {
 			mario->SetState(MARIO_STATE_JUMP);
 		}

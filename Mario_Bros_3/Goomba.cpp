@@ -119,3 +119,5 @@ void CGoomba::SetState(int state)
 	
 
 }
+
+

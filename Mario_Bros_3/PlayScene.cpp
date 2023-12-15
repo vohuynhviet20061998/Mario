@@ -133,18 +133,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
-	case OBJECT_TYPE_MARIO_NO_GRAVITY:
-		if (player != NULL)
-		{
-			DebugOut(L"[ERROR] MARIO object was created before!\n");
-			return;
-		}
-		obj = new CMario(x, y, 0);
-		
-		player = (CMario*)obj;
-
-		DebugOut(L"[INFO] Player object has been created!\n");
-		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y, GOOMBA_OBJECT_NORMAL); break;
 	case OBJECT_TYPE_PARAGOOMBA: obj = new CParaGoomba(x, y); break;
 	case OBJECT_TYPE_KOOPAS:obj = new CKoopas(x, y); break;
