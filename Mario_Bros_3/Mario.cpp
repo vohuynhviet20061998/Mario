@@ -106,31 +106,19 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 			{
 				CollisionEffect();
 			}
-			if (level == MARIO_LEVEL_FIRE)
-			{
-				level = MARIO_LEVEL_BIG;
+			else {
+				if (game->IsKeyDown(DIK_A) && (game->IsKeyDown(DIK_RIGHT) || game->IsKeyDown(DIK_LEFT))) {
+					koopas->HandledByMario();
+					isPickup = true;
+				}
+				else
+					koopas->SetState(KOOPAS_STATE_SLIDE);
 				StartUntouchable();
 			}
-			else if (level == MARIO_LEVEL_BIG) {
-				level = MARIO_LEVEL_SMALL;
-				StartUntouchable();
-			}
-			else
-			{
-				DebugOut(L">>> Mario DIE >>> \n");
-				SetState(MARIO_STATE_DIE);
-			}
+			
 
 		}
-		else {
-			if (game->IsKeyDown(DIK_A) && (game->IsKeyDown(DIK_RIGHT) || game->IsKeyDown(DIK_LEFT))) {
-				koopas->HandledByMario();
-				isPickup = true;
-			}
-			else
-				koopas->SetState(KOOPAS_STATE_SLIDE);
-			StartUntouchable();
-		}
+		
 	}
 }
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)

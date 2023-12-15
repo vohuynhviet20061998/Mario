@@ -65,5 +65,6 @@ public:
 	void HandledByMario();
 	void HandledByMarioRelease();
 	void setPositionByHandle();
+	void setPositionSlide();
 	void Release() {};
 };

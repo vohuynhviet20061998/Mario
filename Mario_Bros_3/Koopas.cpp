@@ -132,10 +132,23 @@ void CKoopas::SetState(int state)
 		break;
 	case KOOPAS_STATE_SLIDE:
 		ay = KOOPAS_GRAVITY;
+		setPositionSlide();
 		break;
+
 
 	}
 }
+
+void CKoopas::setPositionSlide()
+{
+	float x_mario, y_mario, vx_mario, vy_mario;
+	mario->GetPosition(x_mario, y_mario);
+	if (x < x_mario)
+		vx = -KOOPAS_SLIDE_SPEED;
+	else
+		vx = KOOPAS_SLIDE_SPEED;
+}
+
 
 void CKoopas::HandledByMario()
 {
