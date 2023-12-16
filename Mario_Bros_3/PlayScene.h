@@ -18,8 +18,7 @@ protected:
 	LPGAMEOBJECT player;
 	
 
-	vector<LPGAMEOBJECT> objects;
-	vector<LPGAMEOBJECT> objects_NoCollision;
+	
 
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
@@ -30,6 +29,8 @@ protected:
 	void LoadAssets(LPCWSTR assetFile);
 
 public:
+	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> objects_NoCollision;
 	vector<LPGAMEOBJECT> get_Objects() { return objects; }
 	void set_Objects(LPGAMEOBJECT Object) {
 		objects.push_back(Object);

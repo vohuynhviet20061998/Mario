@@ -40,5 +40,6 @@ public:
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void SetState(int state);
+	
 	void Release() {};
 };

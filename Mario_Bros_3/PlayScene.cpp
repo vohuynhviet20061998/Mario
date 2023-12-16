@@ -154,10 +154,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 	}
 
-	//case OBJECT_TYPE_FLOWER_VENUS: {
-	//	obj = new Flowers(x, y, ID_ANI_FLOWER_IDLE);
-	//	break; 
-	//}
+	case OBJECT_TYPE_FLOWER_VENUS: {
+		obj = new Flowers(x, y);
+		break; 
+	}
 	case OBJECT_TYPE_BRICK_QUESTIONS: {
 		obj = new CBrick_Questions(x, y, BRICK_OBJECT_QUESTION);
 		break;

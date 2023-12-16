@@ -14,6 +14,8 @@ Resource\Objects\goomba.txt
 Resource\Objects\leaf.txt
 Resource\Objects\ParaGoomba.txt
 Resource\Objects\Koopas.txt
+Resource\Objects\flowers.txt
+
 
 #
 [OBJECTS]
@@ -80,6 +82,9 @@ Resource\Objects\Koopas.txt
 
 #Koopas
 20	168	108
+
+#FLOWERS
+18	216	112
 #Platform
 5	0	140	16	16	40	51000	52000
 5	640	124	16	16	29	51000	52000

@@ -1,8 +1,11 @@
 #pragma once
 #include "GameObject.h"
+#include "Mario.h"
 
 #define FLOWER_BBOX_WIDTH 16
 #define FLOWER_BBOX_HEIGHT 32
+#define VENUS_HEIGHT 70
+#define VENUS_WIDTH 70
 
 
 #define ID_ANI_FLOWER_IDLE	2000
@@ -32,6 +35,15 @@ class Flowers : public CGameObject
 protected:
 	float ax;
 	float ay;
+	float x, y, start_y;
+	int type;
+	bool isShooting = false;
+	bool isUp = false;
+	bool isRight = false;
+	bool isStop = false;
+	ULONGLONG shootingTime;
+	CMario* mario = NULL;
+
 
 	ULONGLONG die_start;
 
@@ -47,7 +59,8 @@ protected:
 
 
 public:
-	Flowers(float x, float y, int object);
+	Flowers(float x, float y);
 	void Release() {};
 	virtual void SetState(int state);
+	void startShootingTime();
 };
