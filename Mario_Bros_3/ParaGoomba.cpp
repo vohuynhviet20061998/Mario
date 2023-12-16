@@ -3,7 +3,7 @@
 CParaGoomba::CParaGoomba(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
-	vx = PARAGOOMBA_WALKING_SPEED;
+	vx = -PARAGOOMBA_WALKING_SPEED;
 	this->ay = PARAGOOMBA_GRAVITY;
 	jumpTime = PARAGOOMBA_FLY_TIMES;
 	isOnPlatform = false;
