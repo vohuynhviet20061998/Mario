@@ -222,6 +222,7 @@ class CMario : public CGameObject
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
 
 	void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
+	void OnCollisionWithFlowers(LPCOLLISIONEVENT e);
 
 	void CollisionEffect();
 

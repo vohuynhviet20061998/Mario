@@ -16,6 +16,7 @@
 #include "Portal.h"
 #include "ParaGoomba.h"
 #include "Koopas.h"
+#include "FLowers.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -80,6 +81,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithParaGoomba(e);
 	else if (dynamic_cast<CKoopas*>(e->obj))
 		OnCollisionWithKoopas(e);
+	else if (dynamic_cast<Flowers*>(e->obj))
+		OnCollisionWithFlowers(e);
 
 }
 
@@ -232,6 +235,14 @@ void CMario::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 			}
 		}
 	}
+}
+
+void CMario::OnCollisionWithFlowers(LPCOLLISIONEVENT e)
+{
+	if (untouchable == 0) {
+		CollisionEffect();
+	}
+	
 }
 
 void CMario::CollisionEffect()
