@@ -84,7 +84,7 @@ Resource\Objects\flowers.txt
 20	168	108
 
 #FLOWERS
-18	216	112
+18	216	88
 #Platform
 5	0	140	16	16	40	51000	52000
 5	640	124	16	16	29	51000	52000
@@ -246,9 +246,6 @@ Resource\Objects\flowers.txt
 10	720	76
 11	1472	92	26000
 10	1472	92
-
-#FLOWER
-18	248	10
 
 
 #goomba-fly

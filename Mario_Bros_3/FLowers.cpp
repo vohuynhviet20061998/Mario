@@ -27,24 +27,11 @@ void Flowers::GetBoundingBox(float& left, float& top, float& right, float& botto
 
 void Flowers::OnNoCollision(DWORD dt)
 {
-	y += vy * dt;
 
 };
 
 void Flowers::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-
-
-	if (e->ny != 0)
-	{
-		vy = 0;
-	}
-	else if (e->nx != 0)
-	{
-		vx = -vx;
-	}
-
-
 }
 
 
@@ -71,11 +58,11 @@ void Flowers::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		else if (x_mario > x) {
 			isRight = true;
 		}
-		if (y < start_y - VENUS_HEIGHT) // have not overlap with pipe
+		if (y < start_y - VENUS_HEIGHT) 
 		{
 			vy = 0.0f;
 			startShootingTime();
-			fireBall* fireball = new fireBall(x, y);
+			fireBall *fireball = new fireBall(x, y);
 			CPlayScene* scene = (LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene();
 			scene->objects.push_back(fireball);
 
@@ -96,8 +83,6 @@ void Flowers::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 
-
-	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
