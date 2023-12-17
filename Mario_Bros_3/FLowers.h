@@ -22,9 +22,9 @@
 #define ID_ANI_VENUS_SHOOT_DOWN_RIGHT 2007
 #define ID_ANI_VENUS_SHOOT_UP_RIGHT 2008
 
-#define VENUS_SPEED 2.0f
+#define VENUS_SPEED 0.25f
 
-#define VENUS_SHOOTING_TIME 4000
+#define VENUS_SHOOTING_TIME 3000
 
 
 
@@ -33,19 +33,13 @@
 class Flowers : public CGameObject
 {
 protected:
-	float ax;
-	float ay;
 	float x, y, start_y;
-	int type;
 	bool isShooting = false;
 	bool isUp = false;
 	bool isRight = false;
 	bool isStop = false;
 	ULONGLONG shootingTime;
 	CMario* mario = NULL;
-
-
-	ULONGLONG die_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

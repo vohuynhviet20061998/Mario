@@ -13,6 +13,7 @@ fireBall::fireBall(float x, float y) : CGameObject(x, y)
 
 
 	mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
 }
 
 void fireBall::Render()
