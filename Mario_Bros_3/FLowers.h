@@ -5,7 +5,8 @@
 #define FLOWER_BBOX_WIDTH 16
 #define FLOWER_BBOX_HEIGHT 32
 #define VENUS_HEIGHT 16
-#define VENUS_WIDTH	64
+#define VENUS_WIDTH	32
+#define VENUS_LIMIT_FIRE	80
 
 
 #define ID_ANI_FLOWER_IDLE	2000
@@ -34,10 +35,11 @@ class Flowers : public CGameObject
 {
 protected:
 	float x, y, start_y;
-	bool isShooting = false;
+	bool isShootingTime = false;
 	bool isUp = false;
 	bool isRight = false;
 	bool isStop = false;
+	bool isFire = false;
 	ULONGLONG shootingTime;
 	CMario* mario = NULL;
 

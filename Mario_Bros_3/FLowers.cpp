@@ -13,6 +13,12 @@ Flowers::Flowers(float x, float y) :CGameObject(x, y)
 	this->y = y;
 	start_y = y;
 	this->vy = -VENUS_SPEED;
+
+	isShootingTime = false;
+	isUp = false;
+	isRight = false;
+	bool isStop = false;
+	bool isFire = false;
 	mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 }
 
@@ -42,13 +48,34 @@ void Flowers::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	mario->GetPosition(x_mario, y_mario);
 
 
-	if (((x - x_mario < VENUS_WIDTH) && (((x + VENUS_WIDTH) - x_mario) > 0)) || ((y - y_mario > 0) && (((x + VENUS_WIDTH) - x_mario) > 0) && (x - x_mario < 0))) {
-		isStop = true;
+	if (((this->x - x_mario < VENUS_WIDTH) && (((this->x + VENUS_WIDTH) - x_mario) > 0)) || ((this->y - y_mario > 0) && (((this->x + VENUS_WIDTH) - x_mario) > 0) && (this->x - x_mario < 0))) {
+		this->isStop = true;
 	}
 	else {
-		isStop = false;
+		this->isStop = false;
 	}
-	if (!this->isShooting ) {
+
+	if ((this->x > x_mario) && ((this->x - VENUS_LIMIT_FIRE) < x_mario)) {
+		if (this->y > y_mario && ((this->y - VENUS_LIMIT_FIRE) < y_mario)) {
+			this->isFire = true;
+		}
+		else if (this->y < y_mario && ((this->y + VENUS_LIMIT_FIRE) > y_mario)) {
+			this->isFire = true;
+		}
+		else
+			this->isFire = false;
+	}
+	else if ((this->x < x_mario) && ((this->x + VENUS_LIMIT_FIRE) > x_mario)) {
+		if (this->y > y_mario && ((this->y - VENUS_LIMIT_FIRE) < y_mario)) {
+			this->isFire = true;
+		}
+		else if (this->y < y_mario && ((this->y + VENUS_LIMIT_FIRE) > y_mario)) {
+			this->isFire = true;
+		}
+		else
+			this->isFire = false;
+	}
+	if (!this->isShootingTime ) {
 		if (y_mario > this->y)
 			this->isUp = false;
 		else if (y_mario < this->y)
@@ -59,24 +86,27 @@ void Flowers::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		else if (x_mario > this->x) {
 			this->isRight = true;
 		}
-		if (y < start_y - VENUS_HEIGHT)
+		if ((y < start_y - VENUS_HEIGHT))
 		{
 			this->vy = 0.0f;
-			startShootingTime();
-			fireBall *fireball = new fireBall(this->x, this->y);
-			if(this->x > mario->get_X())
-				fireball->SetSpeed(-FIRE_BALL_SPEED_X, FIRE_BALL_SPEED_Y);
-			else
-				fireball->SetSpeed(FIRE_BALL_SPEED_X, FIRE_BALL_SPEED_Y);
-			CPlayScene* scene = (LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene();
-			scene->objects.push_back(fireball);	
+			if (this->isFire) {
+				startShootingTime();
+				fireBall *fireball = new fireBall(this->x, this->y);
+				if(this->x > mario->get_X())
+					fireball->SetSpeed(-FIRE_BALL_SPEED_X, FIRE_BALL_SPEED_Y);
+				else
+					fireball->SetSpeed(FIRE_BALL_SPEED_X, FIRE_BALL_SPEED_Y);
+				CPlayScene* scene = (LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene();
+				scene->objects.push_back(fireball);	
+
+			}
 
 		}
 	}
 	else if (GetTickCount64() - this->shootingTime > VENUS_SHOOTING_TIME) {
 
 		this->shootingTime = 0;
-		this->isShooting = false;
+		this->isShootingTime = false;
 		this->vy = VENUS_SPEED;
 	}
 	if (y > start_y + VENUS_HEIGHT) {
@@ -98,7 +128,7 @@ void Flowers::Render()
 	int ID_ANI = -1;
 
 	if (this->isRight == true) {
-		if (this->isShooting == true) {
+		if (this->isShootingTime == true) {
 			if (this->isUp == true)
 				ID_ANI = ID_ANI_VENUS_SHOOT_UP_RIGHT;
 			else
@@ -113,7 +143,7 @@ void Flowers::Render()
 	}
 	else
 	{
-		if (this->isShooting == true) {
+		if (this->isShootingTime == true) {
 			if (this->isUp == true)
 				ID_ANI = ID_ANI_VENUS_SHOOT_UP_LEFT;
 			else
@@ -135,7 +165,7 @@ void Flowers::Render()
 
 void Flowers::startShootingTime()
 {
-	this->isShooting = true;
+	this->isShootingTime = true;
 	this->shootingTime = GetTickCount64();
 }
 
