@@ -11,9 +11,9 @@
 #define ID_ANI_FIREBALL	30000
 #define Width_fireBall 8
 #define FIREBALL_WIDTH	8
-#define FIREBALL_HEIGHT	16
+#define FIREBALL_HEIGHT	8
 
-#define FIREBALL_Y 10
+#define FIREBALL_Y 8
 #define FIRE_BALL_SPEED_X 0.3f
 #define FIRE_BALL_SPEED_Y 0.1f
 
@@ -38,12 +38,12 @@ public:
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
-	int IsBlocking() { return 0; }
-	int IsCollidable() { return 1; };
-	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
+	int IsCollidable() { return 1; }
+	int IsThrough() { return 1; }
 	void SetState(int state);
 	void Release(){}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void OnCollisionWithMario(LPCOLLISIONEVENT e);
 
 	void startfindslidedirecttion(DWORD dt);
 

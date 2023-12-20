@@ -224,7 +224,7 @@ class CMario : public CGameObject
 	void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithFlowers(LPCOLLISIONEVENT e);
 
-	void CollisionEffect();
+	
 
 	int GetAniIdBig();
 	int GetAniIdFire();
@@ -253,6 +253,8 @@ public:
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);
+	void CollisionEffect();
+
 
 	int IsCollidable()
 	{

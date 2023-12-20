@@ -357,6 +357,6 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 int CCollisionEvent::WasCollided()
 {
 	return
-		t >= 0.0f && t <= 1.0f && obj->IsDirectionColliable(nx, ny) == 1;
+		t >= 0.0f && t <= 1.0f && obj->IsDirectionColliable(nx, ny) == 1  ;
 	
 }

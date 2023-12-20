@@ -1,5 +1,7 @@
 #include "fireBall.h"
 #include "Goomba.h"
+#include "FLowers.h"
+#include "box.h"
 
 
 fireBall::fireBall(float x, float y) : CGameObject(x, y)
@@ -9,6 +11,9 @@ fireBall::fireBall(float x, float y) : CGameObject(x, y)
 
 	this->vx = FIRE_BALL_SPEED_X;
 	this->vy = FIRE_BALL_SPEED_Y;
+
+	unfindslidedirecttion_time = -1;
+	unfindslidedirecttion = 1;
 
 
 
@@ -27,9 +32,7 @@ void fireBall::Render()
 void fireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 {
-	if (unfindslidedirecttion) {
-		startfindslidedirecttion(dt);
-	}
+	
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -37,42 +40,22 @@ void fireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void fireBall::OnNoCollision(DWORD dt)
 {
-	if (nx < 0) {
-		x += -vx * dt;
-		if (ny < 0)
-			y += vy * dt;
-		else
-			y -= vy * dt;
-	}
-	if (nx > 0) {
-		x += vx * dt;
-		if (ny < 0)
-			y -= vy * dt;
-		else
-			y += vy * dt;
-	}
+	x += vx * dt;
+	y += vy * dt;
 
 };
 void fireBall::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+	
 
+	this->Delete();
+	if (dynamic_cast<CMario*>(e->obj)) {
+		OnCollisionWithMario(e);
+	}
 
-	if (e->ny != 0)
-	{
-		vy = 0;
-	}
-	else if (e->nx != 0)
-	{
-		vx = -vx;
-	}
-	if (dynamic_cast<CGoomba*>(e->obj))
-		OnCollisionWithGoomba(e);
 }
 
-void fireBall::OnCollisionWithGoomba(LPCOLLISIONEVENT e) {
-	if( nx != 0 )
-		e->obj->Delete();
-}
+
 void fireBall::SetState(int state)
 {
 
@@ -86,28 +69,40 @@ void fireBall::GetBoundingBox(float& left, float& top, float& right, float& bott
 	bottom = top + FIREBALL_HEIGHT;
 }
 
+void fireBall::OnCollisionWithMario(LPCOLLISIONEVENT e)
+{
+	mario->CollisionEffect();
+}
+
 void fireBall::startfindslidedirecttion(DWORD dt)
 {
 	float x_mario, y_mario;
 	mario->GetPosition(x_mario, y_mario);
 
+
 	if (x_mario < x) {
 		nx = -1;
+		this->vx = -FIRE_BALL_SPEED_X;
 		if (y_mario > y) {
 			ny = -1;
+			this->vy = FIRE_BALL_SPEED_Y;
 		}
 		else if (y_mario < y) {
 			ny = 1;
+			this->vy = -FIRE_BALL_SPEED_Y;
 		}
 	}
 
 	else if (x_mario > x) {
 		nx = 1;
+		this->vx = FIRE_BALL_SPEED_X;
 		if (y_mario > y) {
 			ny = 1;
+			this->vy = FIRE_BALL_SPEED_Y;
 		}
 		else if (y_mario < y) {
 			ny = -1;
+			this->vy = -FIRE_BALL_SPEED_Y;
 		}
 	}
 	unfindslidedirecttion = 0;

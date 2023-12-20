@@ -96,6 +96,7 @@ void Flowers::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					fireball->SetSpeed(-FIRE_BALL_SPEED_X, FIRE_BALL_SPEED_Y);
 				else
 					fireball->SetSpeed(FIRE_BALL_SPEED_X, FIRE_BALL_SPEED_Y);
+				fireball->startfindslidedirecttion(dt);
 				CPlayScene* scene = (LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene();
 				scene->objects.push_back(fireball);	
 
