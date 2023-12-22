@@ -123,7 +123,6 @@ void CKoopas::SetState(int state)
 		y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
-		ay = 0;
 		break;
 	case KOOPAS_STATE_WALKING:
 		if (waking_start > 0) {
@@ -164,26 +163,27 @@ void CKoopas::HandledByMarioRelease()
 
 void CKoopas::setPositionByHandle()
 {
-	float x_mario, y_mario, vx_mario, vy_mario;
+	float x_mario, y_mario, nx_mario, ny_mario;
 	mario->GetPosition(x_mario, y_mario);
-	mario->GetSpeed(vx_mario, vy_mario);
+	nx_mario = mario->get_NX();
+	ny_mario = mario->get_NY();
 
 	if (mario->GetLevel() == MARIO_LEVEL_SMALL) {
-		if (vx_mario < 0)
+		if (nx_mario <= 0)
 			SetPosition(x_mario - MARIO_SMALL_HANDLED_WIDTH, y_mario - MARIO_SMALL_HANDLED_HEIGHT);
-		else if (vx_mario > 0)
+		else if (nx_mario > 0)
 			SetPosition(x_mario + MARIO_SMALL_HANDLED_WIDTH, y_mario - MARIO_SMALL_HANDLED_HEIGHT);
 	}
 	else if (mario->GetLevel() == MARIO_LEVEL_BIG) {
-		if (vx_mario < 0)
+		if (nx_mario <= 0)
 			SetPosition(x_mario - MARIO_BIG_HANDLED_WIDTH, y_mario + MARIO_BIG_HANDLED_HEIGHT);
-		else if (vx_mario > 0)
+		else if (nx_mario > 0)
 			SetPosition(x_mario + MARIO_BIG_HANDLED_WIDTH, y_mario + MARIO_BIG_HANDLED_HEIGHT);
 	}
 	else {
-		if (vx_mario < 0)
+		if (nx_mario <= 0)
 			SetPosition(x_mario - MARIO_RACCOON_HANDLED_WIDTH, y_mario + MARIO_RACCOON_HANDLED_HEIGHT);
-		else if (vx_mario > 0)
+		else if (nx_mario > 0)
 			SetPosition(x_mario + MARIO_RACCOON_HANDLED_WIDTH, y_mario + MARIO_RACCOON_HANDLED_HEIGHT);
 	}
 }

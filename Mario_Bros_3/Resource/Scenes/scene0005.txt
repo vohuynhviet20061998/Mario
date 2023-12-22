@@ -83,8 +83,8 @@ Resource\Objects\flowers.txt
 
 
 
-#FLOWERS
-18	216	88
+#Koopas
+20	496	108
 
 
 

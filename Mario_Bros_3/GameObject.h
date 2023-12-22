@@ -46,6 +46,11 @@ public:
 	void set_NX(int nx) {
 		this->nx = nx;
 	}
+	int get_NY() { return this->ny; }
+
+	void set_NY(int ny) {
+		this->ny = ny;
+	}
 	int get_NX() { return this->nx; }
 
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
