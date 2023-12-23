@@ -80,12 +80,17 @@ Resource\Objects\flowers.txt
 # MARIO
 0	120	10
 
+# Goomba
+2	300	108
 
-
+#paraGoomba
+19	598	108
 
 #Koopas
 20	496	108
 
+#flowers
+18	216	88
 
 
 #Platform
@@ -227,8 +232,13 @@ Resource\Objects\flowers.txt
 1	2256	92	16	16	2	21000
 1	2256	44	16	16	2	21000
 
+#powerup
+12	176	76	120000
+12	720	76	120000
+12	1472	92	120000
+
 #coin
-13	140	92
+4	160	76
 11	160	76	26000
 10	160	76
 11	176	76	26000
