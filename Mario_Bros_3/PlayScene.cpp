@@ -182,8 +182,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 	case OBJECT_TYPE_LEAF: {
-		int sprite_id = atoi(tokens[3].c_str());
-		obj = new Cleaf(x, y, sprite_id);
+		obj = new Cleaf(x, y);
 		break;
 	}
 

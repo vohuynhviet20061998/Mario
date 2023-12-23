@@ -3,6 +3,7 @@
 #include "PlayScene.h"
 
 
+
 LPGAME game = CGame::GetInstance();
 CKoopas::CKoopas(float x, float y) :CGameObject(x, y)
 {
@@ -41,6 +42,7 @@ void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CKoopas*>(e->obj)) return;
+	
 
 
 	if (e->ny != 0)
@@ -81,7 +83,9 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else {
 			HandledByMarioRelease();
-			SetState(KOOPAS_STATE_SLIDE);
+			if (state == KOOPAS_STATE_DIE) {
+				SetState(KOOPAS_STATE_SLIDE);
+			}
 		}
 	}
 
@@ -120,9 +124,10 @@ void CKoopas::SetState(int state)
 	{
 	case KOOPAS_STATE_DIE:
 		die_start = GetTickCount64();
-		y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2;
+		this->y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2 ;
 		vx = 0;
 		vy = 0;
+		ay = 0;
 		break;
 	case KOOPAS_STATE_WALKING:
 		if (waking_start > 0) {
@@ -131,7 +136,6 @@ void CKoopas::SetState(int state)
 		vx = KOOPAS_WALKING_SPEED;
 		break;
 	case KOOPAS_STATE_SLIDE:
-		ay = KOOPAS_GRAVITY;
 		setPositionSlide();
 		break;
 

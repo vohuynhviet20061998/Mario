@@ -61,7 +61,9 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 			break;
 
 		}
+
 	}
+
 }
 
 void CSampleKeyHandler::OnKeyUp(int KeyCode)

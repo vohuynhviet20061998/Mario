@@ -100,6 +100,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 			koopas->SetState(KOOPAS_STATE_DIE);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+		
 	}
 	else // hit by Goomba
 	{
@@ -115,7 +116,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 					isPickup = true;
 				}
 				else
-					koopas->SetState(KOOPAS_STATE_SLIDE);
+				koopas->SetState(KOOPAS_STATE_SLIDE);
 				StartUntouchable();
 			}
 			
@@ -183,18 +184,15 @@ void CMario::OnCollisionWithPowerup(LPCOLLISIONEVENT e)
 }
 void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 {
-	if (is_Eat_leaf) {
-		this->SetLevel(MARIO_LEVEL_FIRE);
-		e->obj->Delete();
-		is_Eat_leaf = false;
+	Cleaf* leaf = dynamic_cast<Cleaf*>(e->obj);
+	
+	if (level > MARIO_LEVEL_SMALL) {
+		SetLevel(MARIO_LEVEL_RACCOON);
 	}
-	if (e->ny > 0) {
-		if (!is_Eat_leaf) {
-
-			e->obj->SetState(leaf_STATE_JUMP);
-			is_Eat_leaf = true;
-		}
+	else {
+		SetLevel(MARIO_LEVEL_BIG);
 	}
+	e->obj->Delete();
 
 
 }

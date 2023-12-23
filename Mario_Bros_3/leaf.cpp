@@ -1,32 +1,49 @@
 #include "leaf.h"
 #include "Brick.h"
+#include "Koopas.h"
+#include "Goomba.h"
+#include "ParaGoomba.h"
 
 
 void Cleaf::Render()
 {
-	CSprites* s = CSprites::GetInstance();
-
-	s->Get(this->spriteId)->Draw(x, y);
-
+	int aniId = -1;
+	if (nx > 0)
+		aniId = ID_ANI_LEAF_RIGHT;
+	else
+		aniId = ID_ANI_LEAF_LEFT;
+	CAnimations* animations = CAnimations::GetInstance();
+	animations->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }
 
 void Cleaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	isCollidable = true;
+	vy += ay * dt;
+	x += vx * dt;
 
-
-	if (GetTickCount64() - time_jump < TIME_JUMP) {
-		this->vy += ay * dt;
-	}
-	else if ((GetTickCount64() - time_jump >= TIME_JUMP) && (GetTickCount64() - time_jump <= TIME_JUMP * 2)) {
-		SetState(leaf_STATE_WALK);
-	}
-	else if (GetTickCount64() - time_jump > TIME_JUMP * 2) {
-		if (this->state == leaf_STATE_WALK) {
-			this->vy = leaf_JUMP_DEFLECT_Y;
-			this->vx = leaf_WALK_X;
+	if (nx == -1) {
+		if (GetTickCount64() - direct_time > DIRECT_TIME && isDirect == true) {
+			nx = 1;
+			direct_time = 0;
+			isDirect = false;
 		}
-
+		else if (isDirect == false) {
+			vx = -ax * dt;
+			startDirect();
+		}
+	}
+	else if (nx == 1) {
+		if (GetTickCount64() - direct_time > DIRECT_TIME && isDirect == true) {
+			nx = -1;
+			direct_time = 0;
+			isDirect = false;
+		}
+		else if (isDirect == false) {
+			vx = ax * dt;
+			startDirect();
+		}
 	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -45,9 +62,12 @@ void Cleaf::OnNoCollision(DWORD dt)
 
 void Cleaf::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+	if (!e->obj->IsBlocking()) return;
+	if (dynamic_cast<CKoopas*>(e->obj)) return;
+	if (dynamic_cast<CParaGoomba*>(e->obj)) return;
 	if (e->ny != 0)
 	{
-		vy = leaf_JUMP_DEFLECT_Y;
+		vy = 0;
 	}
 	else
 		if (e->nx != 0)
@@ -72,16 +92,10 @@ void Cleaf::SetState(int state)
 	switch (state)
 	{
 	case leaf_STATE_IDLE:
-		this->vy = 0;
-		this->ay = 0;
-		break;
-	case leaf_STATE_JUMP:
-		this->vy = -leaf_JUMP_Y;
-		time_jump = GetTickCount64();
-		break;
-	case leaf_STATE_WALK:
-		this->vy = leaf_JUMP_DEFLECT_Y;
-		this->vx = 0;
+		isCollidable = false;
+		y = start_y - MAX_Y;
+		ay = LEAF_GRAVITY_AY;
+		ax = LEAF_GRAVITY_AX;
 		break;
 	}
 }
