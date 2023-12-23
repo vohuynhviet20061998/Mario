@@ -34,6 +34,12 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_2:
 		mario->SetLevel(MARIO_LEVEL_BIG);
 		break;
+	case DIK_3:
+		mario->SetLevel(MARIO_LEVEL_FIRE);
+		break;
+	case DIK_4:
+		mario->SetLevel(MARIO_LEVEL_RACCOON);
+		break;
 	case DIK_0:
 		mario->SetState(MARIO_STATE_DIE);
 		break;
@@ -43,7 +49,7 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 
 			fireBall* _fire;
 
-			_fire = new fireBall(mario->get_X(), mario->get_Y());
+			_fire = new fireBall(mario->get_X(), mario->get_Y() + FIREBALL_HEIGHT);
 
 			if (game->IsKeyDown(DIK_RIGHT)) {
 				_fire->SetSpeed(0.2f, 0);
