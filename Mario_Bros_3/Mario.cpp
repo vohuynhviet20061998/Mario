@@ -186,13 +186,13 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 {
 	Cleaf* leaf = dynamic_cast<Cleaf*>(e->obj);
 	
-	if (level > MARIO_LEVEL_SMALL) {
-		SetLevel(MARIO_LEVEL_RACCOON);
-	}
-	else {
-		SetLevel(MARIO_LEVEL_BIG);
-	}
-	e->obj->Delete();
+		if (level > MARIO_LEVEL_SMALL) {
+			SetLevel(MARIO_LEVEL_RACCOON);
+		}
+		else {
+			SetLevel(MARIO_LEVEL_BIG);
+		}
+		e->obj->Delete();
 
 
 }

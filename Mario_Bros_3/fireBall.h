@@ -44,6 +44,8 @@ public:
 	void Release(){}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void OnCollisionWithMario(LPCOLLISIONEVENT e);
+	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
+	void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
 
 	void startfindslidedirecttion(DWORD dt);
 

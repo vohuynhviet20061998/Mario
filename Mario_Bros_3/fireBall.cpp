@@ -2,6 +2,8 @@
 #include "Goomba.h"
 #include "FLowers.h"
 #include "box.h"
+#include "Koopas.h"
+#include "ParaGoomba.h"
 
 
 fireBall::fireBall(float x, float y) : CGameObject(x, y)
@@ -52,6 +54,9 @@ void fireBall::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CMario*>(e->obj)) {
 		OnCollisionWithMario(e);
 	}
+	else if(dynamic_cast<CGoomba*>(e->obj)) {
+		OnCollisionWithGoomba(e);
+	}
 
 }
 
@@ -73,6 +78,20 @@ void fireBall::OnCollisionWithMario(LPCOLLISIONEVENT e)
 {
 	mario->CollisionEffect();
 }
+
+void fireBall::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
+{
+	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+	goomba->SetState(GOOMBA_STATE_DIE);
+}
+
+void fireBall::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
+{
+	CParaGoomba* paraGoomba = dynamic_cast<CParaGoomba*>(e->obj);
+	paraGoomba->SetState(PARAGOOMBA_STATE_DIE);
+}
+
+
 
 void fireBall::startfindslidedirecttion(DWORD dt)
 {
