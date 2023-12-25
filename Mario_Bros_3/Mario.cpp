@@ -99,7 +99,9 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 		{
 			koopas->SetState(KOOPAS_STATE_DIE);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
+			
 		}
+		
 		
 	}
 	else // hit by Goomba

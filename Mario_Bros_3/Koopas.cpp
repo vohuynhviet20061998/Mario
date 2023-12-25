@@ -68,12 +68,12 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if ((state == KOOPAS_STATE_DIE) && (GetTickCount64() - die_start > KOOPAS_DIE_TIMEOUT) && isHandled != true)
 	{
-		SetState(KOOPAS_STATE_WAKING);
+		SetState(KOOPAS_STATE_GO);
 		startWakingTime();
 	}
 
 	
-	if (state == KOOPAS_STATE_WAKING && (GetTickCount64() - waking_start > KOOPAS_WAKING_TIMEOUT)) {
+	if (state == KOOPAS_STATE_GO && (GetTickCount64() - waking_start > KOOPAS_WAKING_TIMEOUT)) {
 		SetState(KOOPAS_STATE_WALKING);
 		waking_start = 0;
 	}
@@ -110,7 +110,7 @@ void CKoopas::Render()
 	{
 		aniId = ID_ANI_KOOPAS_DIE;
 	}
-	if (state == KOOPAS_STATE_WAKING) {
+	if (state == KOOPAS_STATE_GO) {
 		aniId = ID_ANI_KOOPAS_WAKING;
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
@@ -127,16 +127,26 @@ void CKoopas::SetState(int state)
 		this->y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2 ;
 		vx = 0;
 		vy = 0;
-		ay = 0;
+		if (isHandled == true) {
+			ay = KOOPAS_GRAVITY;
+		}
+		else {
+			ay = 0;
+		}
 		break;
 	case KOOPAS_STATE_WALKING:
 		if (waking_start > 0) {
 			y -= (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2;
 		}
 		vx = KOOPAS_WALKING_SPEED;
+		ay = KOOPAS_GRAVITY;
 		break;
 	case KOOPAS_STATE_SLIDE:
+		ay = KOOPAS_GRAVITY;
 		setPositionSlide();
+		break;
+	case KOOPAS_STATE_GO:
+		ay = KOOPAS_GRAVITY;
 		break;
 
 

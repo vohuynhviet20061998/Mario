@@ -80,17 +80,11 @@ Resource\Objects\flowers.txt
 # MARIO
 0	120	10
 
-# Goomba
-2	300	108
-
-#paraGoomba
-19	598	108
 
 #Koopas
 20	496	108
 
-#flowers
-18	216	88
+
 
 
 #Platform
