@@ -66,5 +66,7 @@ public:
 	void HandledByMarioRelease();
 	void setPositionByHandle();
 	void setPositionSlide();
+	void setPositionJump(int x_koopas, int y_koopas);
+	void setPositionJumpSlide(int x_koopas, int y_koopas);
 	void Release() {};
 };

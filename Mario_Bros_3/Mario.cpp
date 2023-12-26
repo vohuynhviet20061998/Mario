@@ -90,16 +90,27 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 {
 	CKoopas* koopas = dynamic_cast<CKoopas*>(e->obj);
+	float x_koopas, y_koopas;
 	LPGAME game = CGame::GetInstance();
 
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny < 0)
 	{
+		koopas->GetPosition(x_koopas, y_koopas);
 		if (koopas->GetState() != KOOPAS_STATE_DIE)
 		{
+			if (koopas->GetState() == KOOPAS_STATE_SLIDE || koopas->GetState() == KOOPAS_STATE_GO) {
+				koopas->setPositionJumpSlide(x_koopas, y_koopas);
+			}
+			else {
+				koopas->setPositionJump(x_koopas, y_koopas);
+			}
 			koopas->SetState(KOOPAS_STATE_DIE);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 			
+		}
+		else {
+			koopas->setPositionJumpSlide(x_koopas, y_koopas);
 		}
 		
 		

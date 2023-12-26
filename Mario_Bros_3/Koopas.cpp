@@ -16,7 +16,7 @@ CKoopas::CKoopas(float x, float y) :CGameObject(x, y)
 
 void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == KOOPAS_STATE_DIE || state == KOOPAS_STATE_SLIDE)
+	if (state == KOOPAS_STATE_DIE || state == KOOPAS_STATE_SLIDE || state == KOOPAS_STATE_GO)
 	{
 		left = x - KOOPAS_BBOX_WIDTH / 2;
 		top = y - KOOPAS_BBOX_HEIGHT_DIE / 2;
@@ -110,7 +110,7 @@ void CKoopas::Render()
 	{
 		aniId = ID_ANI_KOOPAS_DIE;
 	}
-	if (state == KOOPAS_STATE_GO) {
+	else if (state == KOOPAS_STATE_GO) {
 		aniId = ID_ANI_KOOPAS_WAKING;
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
@@ -124,7 +124,6 @@ void CKoopas::SetState(int state)
 	{
 	case KOOPAS_STATE_DIE:
 		die_start = GetTickCount64();
-		this->y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2 ;
 		vx = 0;
 		vy = 0;
 		if (isHandled == true) {
@@ -146,7 +145,10 @@ void CKoopas::SetState(int state)
 		setPositionSlide();
 		break;
 	case KOOPAS_STATE_GO:
-		ay = KOOPAS_GRAVITY;
+		vx = 0;
+		vy = 0;
+		ax = 0;
+		ay = 0;
 		break;
 
 
@@ -161,6 +163,20 @@ void CKoopas::setPositionSlide()
 		vx = -KOOPAS_SLIDE_SPEED;
 	else
 		vx = KOOPAS_SLIDE_SPEED;
+}
+
+void CKoopas::setPositionJump(int x_koopas, int y_koopas)
+{
+	this->x = x_koopas;
+
+	this->y = y_koopas + (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2;
+
+}
+
+void CKoopas::setPositionJumpSlide(int x_koopas, int y_koopas)
+{
+	this->x = x_koopas;
+	this->y = y_koopas;
 }
 
 
