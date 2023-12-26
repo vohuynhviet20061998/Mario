@@ -1,5 +1,5 @@
 #include "Koopas.h"
-#include "Goomba.h"
+#include "ParaGoomba.h"
 #include "PlayScene.h"
 
 
@@ -16,7 +16,7 @@ CKoopas::CKoopas(float x, float y) :CGameObject(x, y)
 
 void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == KOOPAS_STATE_DIE || state == KOOPAS_STATE_SLIDE || state == KOOPAS_STATE_GO)
+	if (state == KOOPAS_STATE_DIE || state == KOOPAS_STATE_SLIDE || state == KOOPAS_STATE_GET_UP)
 	{
 		left = x - KOOPAS_BBOX_WIDTH / 2;
 		top = y - KOOPAS_BBOX_HEIGHT_DIE / 2;
@@ -68,12 +68,12 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if ((state == KOOPAS_STATE_DIE) && (GetTickCount64() - die_start > KOOPAS_DIE_TIMEOUT) && isHandled != true)
 	{
-		SetState(KOOPAS_STATE_GO);
+		SetState(KOOPAS_STATE_GET_UP);
 		startWakingTime();
 	}
 
 	
-	if (state == KOOPAS_STATE_GO && (GetTickCount64() - waking_start > KOOPAS_WAKING_TIMEOUT)) {
+	if (state == KOOPAS_STATE_GET_UP && (GetTickCount64() - waking_start > KOOPAS_WAKING_TIMEOUT)) {
 		SetState(KOOPAS_STATE_WALKING);
 		waking_start = 0;
 	}
@@ -110,7 +110,7 @@ void CKoopas::Render()
 	{
 		aniId = ID_ANI_KOOPAS_DIE;
 	}
-	else if (state == KOOPAS_STATE_GO) {
+	else if (state == KOOPAS_STATE_GET_UP) {
 		aniId = ID_ANI_KOOPAS_WAKING;
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
@@ -144,7 +144,7 @@ void CKoopas::SetState(int state)
 		ay = KOOPAS_GRAVITY;
 		setPositionSlide();
 		break;
-	case KOOPAS_STATE_GO:
+	case KOOPAS_STATE_GET_UP:
 		vx = 0;
 		vy = 0;
 		ax = 0;

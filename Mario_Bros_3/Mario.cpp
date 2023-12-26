@@ -99,7 +99,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 		koopas->GetPosition(x_koopas, y_koopas);
 		if (koopas->GetState() != KOOPAS_STATE_DIE)
 		{
-			if (koopas->GetState() == KOOPAS_STATE_SLIDE || koopas->GetState() == KOOPAS_STATE_GO) {
+			if (koopas->GetState() == KOOPAS_STATE_SLIDE || koopas->GetState() == KOOPAS_STATE_GET_UP) {
 				koopas->setPositionJumpSlide(x_koopas, y_koopas);
 			}
 			else {
@@ -111,6 +111,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 		}
 		else {
 			koopas->setPositionJumpSlide(x_koopas, y_koopas);
+			koopas->SetState(KOOPAS_STATE_SLIDE);
 		}
 		
 		
