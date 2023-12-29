@@ -13,11 +13,13 @@
 
 #define KOOPAS_DIE_TIMEOUT 5000
 #define KOOPAS_WAKING_TIMEOUT 2000
+#define KOOPAS_HANDLED_TIMEOUT	3000
 
 #define KOOPAS_STATE_WALKING 100
 #define KOOPAS_STATE_DIE 200
 #define KOOPAS_STATE_SLIDE 300
 #define KOOPAS_STATE_GET_UP 400
+#define KOOPAS_STATE_FALL	500
 
 #define ID_ANI_KOOPAS_WALKING_LEFT 10001
 #define ID_ANI_KOOPAS_WALKING_RIGHT 10002 
@@ -45,6 +47,7 @@ protected:
 
 	ULONGLONG die_start;
 	ULONGLONG waking_start;
+	ULONGLONG pickup_start;
 
 	BOOLEAN isHandled = false;
 
@@ -62,6 +65,7 @@ public:
 	CKoopas(float x, float y);
 	virtual void SetState(int state);
 	void startWakingTime() { waking_start = GetTickCount64(); }
+	void startPickUpTime() { pickup_start = GetTickCount64(); }
 	void HandledByMario();
 	void HandledByMarioRelease();
 	void setPositionByHandle();

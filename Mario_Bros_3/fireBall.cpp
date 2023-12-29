@@ -51,10 +51,7 @@ void fireBall::OnCollisionWith(LPCOLLISIONEVENT e)
 	
 
 	this->Delete();
-	if (dynamic_cast<CMario*>(e->obj)) {
-		OnCollisionWithMario(e);
-	}
-	else if(dynamic_cast<CGoomba*>(e->obj)) {
+	if(dynamic_cast<CGoomba*>(e->obj)) {
 		OnCollisionWithGoomba(e);
 	}
 
@@ -74,10 +71,7 @@ void fireBall::GetBoundingBox(float& left, float& top, float& right, float& bott
 	bottom = top + FIREBALL_HEIGHT;
 }
 
-void fireBall::OnCollisionWithMario(LPCOLLISIONEVENT e)
-{
-	mario->CollisionEffect();
-}
+
 
 void fireBall::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 {
@@ -90,6 +84,7 @@ void fireBall::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 	CParaGoomba* paraGoomba = dynamic_cast<CParaGoomba*>(e->obj);
 	paraGoomba->SetState(PARAGOOMBA_STATE_DIE);
 }
+
 
 
 

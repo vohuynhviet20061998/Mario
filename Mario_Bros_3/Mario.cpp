@@ -17,6 +17,7 @@
 #include "ParaGoomba.h"
 #include "Koopas.h"
 #include "FLowers.h"
+#include "fireBall.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -83,6 +84,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithKoopas(e);
 	else if (dynamic_cast<Flowers*>(e->obj))
 		OnCollisionWithFlowers(e);
+	else if (dynamic_cast<fireBall*>(e->obj))
+		OnCollisionWithFireBall(e);
 
 }
 
@@ -128,6 +131,8 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 				if (game->IsKeyDown(DIK_A) && (game->IsKeyDown(DIK_RIGHT) || game->IsKeyDown(DIK_LEFT))) {
 					koopas->HandledByMario();
 					isPickup = true;
+					
+		
 				}
 				else
 				koopas->SetState(KOOPAS_STATE_SLIDE);
@@ -255,6 +260,14 @@ void CMario::OnCollisionWithFlowers(LPCOLLISIONEVENT e)
 		CollisionEffect();
 	}
 	
+}
+
+void CMario::OnCollisionWithFireBall(LPCOLLISIONEVENT e)
+{
+	fireBall* fireball = dynamic_cast<fireBall*>(e->obj);
+	if (untouchable == 0) {
+		CollisionEffect();
+	}
 }
 
 void CMario::CollisionEffect()

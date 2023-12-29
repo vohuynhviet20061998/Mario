@@ -6,7 +6,7 @@
 
 #define FIREBALL_LEFT 1
 #define FIREBALL_RIGHT 2
-#define FIREBALL_SPEED 1.0f
+#define FIREBALL_SPEED 0.5f
 
 #define ID_ANI_FIREBALL	30000
 #define Width_fireBall 8
@@ -43,9 +43,10 @@ public:
 	void SetState(int state);
 	void Release(){}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
-	void OnCollisionWithMario(LPCOLLISIONEVENT e);
+	
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
+	
 
 	void startfindslidedirecttion(DWORD dt);
 

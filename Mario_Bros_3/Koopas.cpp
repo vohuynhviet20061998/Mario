@@ -77,11 +77,13 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		SetState(KOOPAS_STATE_WALKING);
 		waking_start = 0;
 	}
+
+
 	if (isHandled == true) {
 		if (game->IsKeyDown(DIK_A)) {
 			setPositionByHandle();
 		}
-		else {
+		else  {
 			HandledByMarioRelease();
 			if (state == KOOPAS_STATE_DIE) {
 				SetState(KOOPAS_STATE_SLIDE);
@@ -150,6 +152,12 @@ void CKoopas::SetState(int state)
 		ax = 0;
 		ay = 0;
 		break;
+	case KOOPAS_STATE_FALL:
+		vx = 0;
+		vy = 0;
+		ax = 0;
+		ay = KOOPAS_GRAVITY;
+		break;
 
 
 	}
@@ -183,6 +191,8 @@ void CKoopas::setPositionJumpSlide(int x_koopas, int y_koopas)
 void CKoopas::HandledByMario()
 {
 	isHandled = true;
+	startPickUpTime();
+	
 }
 
 

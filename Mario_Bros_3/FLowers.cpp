@@ -10,7 +10,7 @@ Flowers::Flowers(float x, float y) :CGameObject(x, y)
 {
 
 	this->x = x;
-	this->y = y;
+	this->y = y + 31;
 	start_y = y;
 	this->vy = -VENUS_SPEED;
 
