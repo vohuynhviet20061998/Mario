@@ -126,6 +126,9 @@
     <ClCompile Include="Koopas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MapPipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -234,6 +237,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Koopas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapPipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

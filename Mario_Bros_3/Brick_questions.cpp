@@ -4,13 +4,11 @@
 void CBrick_Questions::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
-	if (object == BRICK_OBJECT_QUESTION) {
-	animations->Get(ID_ANI_Brick_Questions)->Render(x, y);
+	int aniId = ID_ANI_Brick_Questions;
+	if (state == QUESTIONBRICK_STATE_DISABLE) {
+		aniId = ID_ANI_Brick_normal;
 	}
-	else if (object == BRICK_OBJECT_TREE) {
-		animations->Get(ID_ANI_Brick_Tree)->Render(x, y);
-		RenderBoundingBox();
-	}
+	animations->Get(aniId)->Render(x, y);
 }
 
 void CBrick_Questions::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

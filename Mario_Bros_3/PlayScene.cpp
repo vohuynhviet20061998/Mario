@@ -40,6 +40,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
 #define SCENE_SECTION_BACKGROUND 3
+#define SCENE_SECTION_MAPPIPE 4
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
@@ -275,11 +276,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
-	case OBJECT_TYPE_MAP: {
+	/*case OBJECT_TYPE_MAP: {
 		int sprite_id = atoi(tokens[3].c_str());
 		obj = new CMap(x, y, sprite_id);
 		break;
-	}
+	}*/
 
 	case OBJECT_TYPE_PORTAL:
 	{
@@ -310,6 +311,24 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 	
 	
+}
+
+void CPlayScene::_ParseSection_MAPPIPE(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 7) return; // skip invalid lines
+
+	LPCWSTR mapFilePath = ToLPCWSTR(tokens[0].c_str());
+	LPCWSTR tilesetFilePath = ToLPCWSTR(tokens[1].c_str());
+	int texId = atoi(tokens[2].c_str());
+	int width_map = atoi(tokens[3].c_str());
+	int height_map = atoi(tokens[4].c_str());
+	int columns = atoi(tokens[5].c_str());
+	int rows = atoi(tokens[6].c_str());
+
+	map_pipe = new CMapPipe(mapFilePath, tilesetFilePath, texId, width_map, height_map, columns, rows);
+	map_pipe->LoadResourceMap();
 }
 
 void CPlayScene::LoadAssets(LPCWSTR assetFile)

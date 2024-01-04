@@ -9,17 +9,24 @@
 #define Brick_Questions_BBOX_WIDTH 16
 #define Brick_Questions_BBOX_HEIGHT 16
 #define ID_ANI_Brick_Questions	210
-#define	ID_ANI_Brick_Tree	310
+#define ID_ANI_Brick_normal		211
+//#define	ID_ANI_Brick_Tree	310
 
 #define BRICK_OBJECT_QUESTION	10
 #define BRICK_OBJECT_TREE	11
 
+#define QUESTIONBRICK_STATE_NORMAL 1100
+#define QUESTIONBRICK_STATE_DISABLE 1200
+
 class CBrick_Questions : public CGameObject {
+	float x, y, start_y;
+	int item_type;
 public:
-	CBrick_Questions(float x, float y, int object) : CGameObject(x, y) {
+	CBrick_Questions(float x, float y, int item_type) : CGameObject(x, y) {
 		this->x = x;
 		this->y = y;
-		this->object = object;
+		start_y = y;
+		this->item_type = item_type;
 	}
 
 	void Render();
