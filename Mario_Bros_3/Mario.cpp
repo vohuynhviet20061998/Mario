@@ -179,8 +179,9 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithBrickQuestions(LPCOLLISIONEVENT e)
 {
-	if (e->ny > 0 && e->obj->get_object() == BRICK_OBJECT_QUESTION) {
-		e->obj->Delete();
+	CBrick_Questions* questionbrick = dynamic_cast<CBrick_Questions*>(e->obj);
+	if (e->ny > 0 and questionbrick->GetState() != QUESTIONBRICK_STATE_DISABLE) {
+		questionbrick->SetState(QUESTIONBRICK_STATE_DISABLE);
 	}
 }
 
