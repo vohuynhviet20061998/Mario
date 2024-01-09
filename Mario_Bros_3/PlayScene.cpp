@@ -23,6 +23,7 @@
 #include "Koopas.h"
 
 
+
 #include "SampleKeyEventHandler.h"
 #include "Debug.h"
 
@@ -40,7 +41,8 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
 #define SCENE_SECTION_BACKGROUND 3
-#define SCENE_SECTION_MAPPIPE 4
+#define SCENE_SECTION_MAP_1 4
+#define SCENE_SECTION_MAPPIPE 5
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
@@ -313,23 +315,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 }
 
-void CPlayScene::_ParseSection_MAPPIPE(string line)
-{
-	vector<string> tokens = split(line);
 
-	if (tokens.size() < 7) return; // skip invalid lines
 
-	LPCWSTR mapFilePath = ToLPCWSTR(tokens[0].c_str());
-	LPCWSTR tilesetFilePath = ToLPCWSTR(tokens[1].c_str());
-	int texId = atoi(tokens[2].c_str());
-	int width_map = atoi(tokens[3].c_str());
-	int height_map = atoi(tokens[4].c_str());
-	int columns = atoi(tokens[5].c_str());
-	int rows = atoi(tokens[6].c_str());
 
-	map_pipe = new CMapPipe(mapFilePath, tilesetFilePath, texId, width_map, height_map, columns, rows);
-	map_pipe->LoadResourceMap();
-}
 
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
 {
@@ -395,7 +383,9 @@ void CPlayScene::Load()
 			_ParseSection_ASSETS(line); break;
 		case SCENE_SECTION_OBJECTS: 
 			_ParseSection_OBJECTS(line); break;
+	
 		}
+		
 	}
 
 	f.close();
@@ -431,8 +421,9 @@ void CPlayScene::Update(DWORD dt)
 	cy -= game->GetBackBufferHeight() / 2;
 
 	if (cx < 0) cx = 0;
+	if (cy > 6) cy = 0;
 
-	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+	CGame::GetInstance()->SetCamPos(cx, cy);
 
 	PurgeDeletedObjects();
 }
@@ -446,6 +437,8 @@ void CPlayScene::Render()
 
 		objects[i]->Render();
 	}
+
+	
 		
 	
 }

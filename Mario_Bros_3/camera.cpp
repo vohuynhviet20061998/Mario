@@ -71,6 +71,7 @@ void Camera::AddCameraBound(RECTF cameraBound) {
 void Camera::Update(DWORD deltaTime, std::vector<CGameObject*>* collidableObjects) {
 	this->y = 15.0f;
 	this->vx = 0.035f;
+	this->vy = 0.035f;
 	CGameObject::Update(deltaTime);
 
 }

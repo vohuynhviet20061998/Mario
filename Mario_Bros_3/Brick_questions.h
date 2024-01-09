@@ -18,7 +18,7 @@
 #define QUESTIONBRICK_STATE_NORMAL 1100
 #define QUESTIONBRICK_STATE_DISABLE 1200
 
-#define QUESTIONBRICK_JUMP_Y 20.0f
+#define QUESTIONBRICK_JUMP_Y 10.0f
 
 class CBrick_Questions : public CGameObject {
 	float x, y, start_y;
