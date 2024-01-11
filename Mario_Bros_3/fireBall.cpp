@@ -16,7 +16,8 @@ fireBall::fireBall(float x, float y) : CGameObject(x, y)
 
 	unfindslidedirecttion_time = -1;
 	unfindslidedirecttion = 1;
-
+	this->ax = 0;
+	this->ay = FIREBALL_GRAVITY;
 
 
 	mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
@@ -34,7 +35,9 @@ void fireBall::Render()
 void fireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 {
-	
+	if (unfindslidedirecttion) {
+		startfindslidedirecttion(dt);
+	}
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -49,7 +52,7 @@ void fireBall::OnNoCollision(DWORD dt)
 void fireBall::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	
-
+	
 	this->Delete();
 	if(dynamic_cast<CGoomba*>(e->obj)) {
 		OnCollisionWithGoomba(e);

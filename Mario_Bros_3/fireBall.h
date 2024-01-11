@@ -17,11 +17,16 @@
 #define FIRE_BALL_SPEED_X 0.3f
 #define FIRE_BALL_SPEED_Y 0.1f
 
+#define UNFINDDIRECTION_TIME 500
+
+#define FIREBALL_GRAVITY 0.00005f
+
 class fireBall : public CGameObject
 {
 private:
 	float maxVx;
 	float ax;
+	float ay;
 	CMario* mario = NULL;
 
 	ULONGLONG unfindslidedirecttion_time;
@@ -39,7 +44,6 @@ public:
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 	int IsCollidable() { return 1; }
-	int IsThrough() { return 1; }
 	void SetState(int state);
 	void Release(){}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
