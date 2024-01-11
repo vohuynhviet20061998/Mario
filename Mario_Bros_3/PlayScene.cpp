@@ -21,6 +21,7 @@
 #include "map.h"
 #include "FLowers.h"
 #include "Koopas.h"
+#include "CameraBound.h"
 
 
 
@@ -293,6 +294,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
+	case OBJECT_TYPE_CAMMERABOUND:
+	{
+		float width = (float)atof(tokens[3].c_str());
+		float height = (float)atof(tokens[4].c_str());
+		obj = new CCameraBound(x, y, width, height);
+		break;
+	}
+
 
 	default:
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
@@ -423,7 +432,7 @@ void CPlayScene::Update(DWORD dt)
 	if (cx < 0) cx = 0;
 	if (cy > 6) cy = 0;
 
-	CGame::GetInstance()->SetCamPos(cx, cy);
+	CGame::GetInstance()->SetCamPos(cx, 0);
 
 	PurgeDeletedObjects();
 }
