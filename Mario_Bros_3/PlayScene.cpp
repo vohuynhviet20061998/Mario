@@ -42,8 +42,10 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
 #define SCENE_SECTION_BACKGROUND 3
-#define SCENE_SECTION_MAP_1 4
+#define SCENE_SECTION_MAP 4
 #define SCENE_SECTION_MAPPIPE 5
+
+
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
@@ -141,22 +143,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_PARAGOOMBA: obj = new CParaGoomba(x, y); break;
 	case OBJECT_TYPE_KOOPAS:obj = new CKoopas(x, y); break;
 
-	case OBJECT_TYPE_BRICK: {
-		float cell_width = (float)atof(tokens[3].c_str());
-		float cell_height = (float)atof(tokens[4].c_str());
-		int length = atoi(tokens[5].c_str());
-		int sprite_begin = atoi(tokens[6].c_str());
-
-
-		obj = new CBrick(
-			x, y,
-			cell_width, cell_height, length,
-			sprite_begin
-		);
-
-		break;
-	
-	}
+	case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
 
 	case OBJECT_TYPE_FLOWER_VENUS: {
 		obj = new Flowers(x, y);
@@ -193,18 +180,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_PLATFORM:
 	{
 
-		float cell_width = (float)atof(tokens[3].c_str());
-		float cell_height = (float)atof(tokens[4].c_str());
-		int length = atoi(tokens[5].c_str());
-		int sprite_begin = atoi(tokens[6].c_str());
-		int sprite_middle = atoi(tokens[7].c_str());
-		
-
-		obj = new CPlatform(
-			x, y,
-			cell_width, cell_height, length,
-			sprite_begin, sprite_middle
-		);
+		float width = (float)atof(tokens[3].c_str());
+		float height = (float)atof(tokens[4].c_str());
+		obj = new CPlatform(x, y, width, height);
 
 		break;
 	}
@@ -280,14 +258,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 
 
-	case OBJECT_TYPE_PORTAL:
+	/*case OBJECT_TYPE_PORTAL:
 	{
 		float r = (float)atof(tokens[3].c_str());
 		float b = (float)atof(tokens[4].c_str());
 		int scene_id = atoi(tokens[5].c_str());
 		obj = new CPortal(x, y, r, b, scene_id);
 		break;
-	}
+	}*/
 
 	case OBJECT_TYPE_CAMMERABOUND:
 	{
@@ -321,8 +299,26 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 
 
+void CPlayScene::_ParseSection_MAP(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 7) return; 
 
 
+	LPCWSTR mapFilePath = ToLPCWSTR(tokens[0].c_str());
+	LPCWSTR tilesetFilePath = ToLPCWSTR(tokens[1].c_str());
+	int texId = atoi(tokens[2].c_str());
+	int width_map = atoi(tokens[3].c_str());
+	int height_map = atoi(tokens[4].c_str());
+	int columns = atoi(tokens[5].c_str());
+	int rows = atoi(tokens[6].c_str());
+
+	map = new CMap(mapFilePath, tilesetFilePath, texId, width_map, height_map, columns, rows);
+	map->LoadResourceMap();
+
+
+}
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
 {
 	DebugOut(L"[INFO] Start loading assets from : %s \n", assetFile);
@@ -341,6 +337,7 @@ void CPlayScene::LoadAssets(LPCWSTR assetFile)
 
 		if (line == "[SPRITES]") { section = ASSETS_SECTION_SPRITES; continue; };
 		if (line == "[ANIMATIONS]") { section = ASSETS_SECTION_ANIMATIONS; continue; };
+		if (line == "[MAP]") { section = SCENE_SECTION_MAP; continue; };
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
@@ -350,6 +347,7 @@ void CPlayScene::LoadAssets(LPCWSTR assetFile)
 		{
 		case ASSETS_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
 		case ASSETS_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
+		case SCENE_SECTION_MAP: _ParseSection_MAP(line); break;
 		}
 	}
 

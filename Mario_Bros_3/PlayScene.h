@@ -9,6 +9,7 @@
 #include "background.h"
 #include "Goomba.h"
 #include "Koopas.h"
+#include "Map.h"
 
 
 
@@ -17,7 +18,7 @@ class CPlayScene : public CScene
 protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
-
+	CMap* map;
 	
 
 	void _ParseSection_SPRITES(string line);
@@ -25,6 +26,8 @@ protected:
 
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
+
+	void _ParseSection_MAP(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
 

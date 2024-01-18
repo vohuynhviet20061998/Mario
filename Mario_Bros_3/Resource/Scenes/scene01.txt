@@ -1,18 +1,14 @@
 # list of object assets to load in this scene
 [ASSETS]
-mario.txt
-brick.txt
-coin.txt
-goomba.txt
-cloud.txt
+.\Resource\Objects\objectscene1.txt
+
+
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas
 # See OBJECT_TYPE constants in AssetIDs.h
 
-# MARIO
-0	20	10
 
 # BRICKS
 1	0	148
@@ -56,8 +52,42 @@ cloud.txt
 2	300	10
 
 #Platform
-5	90	136	16	15	16	51000	52000	53000
-5	120	90	16	16	8	20001	20001	20001
+5	2	1248	1872	48
+5	1056	1104	96	144
+5	1872	1200	1392	96
+5	3456	1248	1008	48
+5	4560	1248	240	48
+5	4752	1104	48	144
+5	4656	1200	48	48
+5	4704	1152	48	48
+5	4944	1104	48	144
+5	4992	1152	48	48
+5	5040	1200	48	48
+5	4944	1248	1703	48
+5	5328	1152	96	100
+5	5520	1104	96	144
+5	6768	1248	1680	48			
+5	6720	1152	96	96
+5	6720	624	96	384
+5	4464	1004	96	48
+5	5856	1392	384	590
+5	7010	1392	381	611
+5	6229	1868	784	108
+5	6624	1820	394	58
+5	6671	1773	347	57
+5	6721	1726	298	60
+5	6768	1678	251	65
+5	6816	1632	202	58
+5	6864	1581	153	55
+5	6336	1392	575	48
+5	6720	1104	96	48
+
 
 #Portal 
 50	300	110	316	140	2
+
+# MARIO
+0	20	10
+
+[MAP]
+Resource\Map\worldmap1-1.txt	Resource\Textures\world-1-1.png	1110	176	41	29	30	

@@ -30,8 +30,8 @@
 //#define SCREEN_WIDTH 320
 //#define SCREEN_HEIGHT 240
 
-#define SCREEN_WIDTH 750
-#define SCREEN_HEIGHT 700
+#define SCREEN_WIDTH 3200
+#define SCREEN_HEIGHT 2400
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

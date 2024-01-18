@@ -23,43 +23,35 @@ void CPlatform::RenderBoundingBox()
 	float cx, cy;
 	CGame::GetInstance()->GetCamPos(cx, cy);
 
-	float xx = x - this->cellWidth / 2 + rect.right / 2;
+	float xx = x - PLATFORM_BBOX_WIDTH / 2 + rect.right / 2;
+	float yy = y - PLATFORM_BBOX_HEIGHT / 2 + rect.bottom / 2;
 
-	CGame::GetInstance()->Draw(xx - cx, y - cy, bbox, nullptr, BBOX_ALPHA, rect.right - 1, rect.bottom - 1);
+	CGame::GetInstance()->Draw(xx - cx, yy - cy, bbox, nullptr, BBOX_ALPHA, rect.right - 1, rect.bottom - 1);
 }
 
-void CPlatform::Release()
+//int CPlatform::IsDirectionColliable(float nx, float ny)
+//{
+//	if (nx == 0 && ny == -1) return 1;
+//	else return 0;
+//}
+
+CPlatform::CPlatform(float x, float y, float width, float height)
 {
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->height = height;
 }
 
 void CPlatform::Render()
 {
-	if (this->length <= 0) return;
-	float xx = x;
-	CSprites* s = CSprites::GetInstance();
-
-	s->Get(this->spriteIdBegin)->Draw(xx, y);
-	xx += this->cellWidth;
-	for (int i = 1; i < this->length - 1; i++)
-	{
-		s->Get(this->spriteIdMiddle)->Draw(xx, y);
-		xx += this->cellWidth;
-	}
-	if (length > 1)
-		s->Get(this->spriteIdMiddle)->Draw(xx, y);
-
 	RenderBoundingBox();
-}
-
-void CPlatform::Update(DWORD dt)
-{
 }
 
 void CPlatform::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	float cellWidth_div_2 = this->cellWidth / 2;
-	l = x - cellWidth_div_2;
-	t = y - this->cellHeight / 2;
-	r = l + this->cellWidth * this->length;
-	b = t + this->cellHeight;
+	l = x - PLATFORM_BBOX_WIDTH / 2;
+	t = y - PLATFORM_BBOX_HEIGHT / 2;
+	r = l + width;
+	b = t + height;
 }
