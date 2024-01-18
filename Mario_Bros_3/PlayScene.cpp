@@ -18,7 +18,7 @@
 #include "Goomba.h"
 #include "ParaGoomba.h"
 #include "leaf.h"
-#include "map.h"
+
 #include "FLowers.h"
 #include "Koopas.h"
 #include "CameraBound.h"
@@ -279,11 +279,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
-	/*case OBJECT_TYPE_MAP: {
-		int sprite_id = atoi(tokens[3].c_str());
-		obj = new CMap(x, y, sprite_id);
-		break;
-	}*/
 
 	case OBJECT_TYPE_PORTAL:
 	{
