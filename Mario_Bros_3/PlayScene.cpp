@@ -22,6 +22,7 @@
 #include "FLowers.h"
 #include "Koopas.h"
 #include "CameraBound.h"
+#include "Bigbox.h"
 
 
 
@@ -254,6 +255,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			cell_width, cell_height, length,
 			sprite_begin, sprite_middle, sprite_end
 		);
+		break;
+	}
+	case OBJECT_TYPE_BIGBOX:
+	{
+
+		float width = (float)atof(tokens[3].c_str());
+		float height = (float)atof(tokens[4].c_str());
+		obj = new CBigbox(x, y, width, height);
+
 		break;
 	}
 
