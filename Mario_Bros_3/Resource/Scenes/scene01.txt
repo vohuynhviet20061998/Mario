@@ -1,6 +1,6 @@
 # list of object assets to load in this scene
 [ASSETS]
-.\Resource\Objects\objectscene1.txt
+Resource\Objects\objectscene1.txt
 
 
 #
@@ -10,36 +10,6 @@
 # See OBJECT_TYPE constants in AssetIDs.h
 
 
-# BRICKS
-1	0	148
-1	0	164
-
-1	0	180
-1	16	180
-1	32	180
-1	48	180
-1	64	180
-1	80	180
-1	96	180
-1	112	180
-1	128	180
-1	144	180
-1	160	180
-1	176	180
-1	192	180
-1	208	180
-1	224	180
-1	240	180
-1	256	180
-1	272	180
-1	288	180
-1	304	180
-1	320	180
-1	336	180
-1	352	180
-
-1	352	148
-1	352	164
 
 #COIN
 4	100	120
@@ -98,11 +68,14 @@
 6	3842	1052	334	192
 6	3937	960	334	289
 
-#Portal 
+#Portal
 50	300	110	316	140	2
 
 # MARIO
 0	20	10
 
 [MAP]
-Resource\Map\worldmap1-1.txt	Resource\Textures\world-1-1.png	1110	176	41	29	30	
+Resource\Map\worldmap1-1.txt	.\Resource\Textures\world-1-1.png	1110	176	41	29	30
+
+[MAPPIPE]
+.\Resource\Map\map-pipe.txt	.\Resource\Textures\world-1-1.png	1110	176	41	29	30

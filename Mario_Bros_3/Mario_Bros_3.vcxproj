@@ -154,11 +154,11 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
+    <ClCompile Include="Hub.cpp" />
     <ClCompile Include="KeyEventHandler.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="leaf.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="map.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="ParaGoomba.cpp" />
     <ClCompile Include="pipe.cpp" />
@@ -195,10 +195,10 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="Hub.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="leaf.h" />
-    <ClInclude Include="map.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="ParaGoomba.h" />
     <ClInclude Include="pipe.h" />
