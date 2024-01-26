@@ -1,0 +1,50 @@
+# id	left	top	right	bottom	texture_id
+[SPRITES]
+-------FLOWER_IDLE---------
+180000	102	0	117	31	90
+180001	119	0	134	31	90
+
+------FLOWER_DOWN_LEFT----------
+180002	136	0	151	31	90
+180003	153	0	168	31	90
+
+------FLOWER_UP_LEFT------------
+180004	170	0	185	31	90
+180005	187	0	202	31	90
+
+-----FLOWER_UP_RIGHT----------
+180006	18	0	33	31	91
+180007	35	0	50	31	91
+
+-----FLOWER_DOWN_RIGHT--------
+180008	52	0	67	31	91
+180009	69	0	84	31	91
+
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+------Animation_IDLE-------
+11000	180000	300	180001	300
+
+------Animation_DOWN_LEFT-------
+11001	180002	300	180003	300
+
+------Animation_UP_LEFT---------
+11002	180004	300	180005	300
+
+------Animation_Shoot_DOWN_LEFT-------
+11003	180002	300
+
+------Animation_Shoot_UP_LEFT----
+11004	180004	300
+
+------Animation_DOWN_RIGHT-------
+11005	180008	300	180009	300
+
+------Animation_UP_LEFT_RIGHT---------
+11006	180006	300	180007	300
+
+------Animation_Shoot_DOWN_RIGHT-------
+11007	180008	300
+
+------Animation_Shoot_UP_RIGHT----
+11008	180006	300

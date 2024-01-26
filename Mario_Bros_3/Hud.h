@@ -3,6 +3,7 @@
 #include "Mario.h"
 #include "Sprite.h"
 
+#define ID_HUD 111112
 
 class Hud : public CGameObject
 {
@@ -15,4 +16,5 @@ public:
 	void Update();
 	void Render();
 	void GetBoundingBox(float& l, float& t, float& r, float& b) { l = 0; t = 0; r = 0; b = 0; };
+	void Release() {};
 };

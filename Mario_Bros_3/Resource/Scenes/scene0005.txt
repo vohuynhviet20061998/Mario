@@ -15,9 +15,10 @@ Resource\Objects\leaf.txt
 Resource\Objects\ParaGoomba.txt
 Resource\Objects\Koopas.txt
 Resource\Objects\flowers.txt
+Resource\Objects\flowers_xanh.txt
+Resource\Objects\hud.txt
 
 
-#
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas
@@ -83,7 +84,7 @@ Resource\Objects\flowers.txt
 
 
 # MARIO
-0	2120	250
+0	1824	10
 
 # Goomba
 2	300	108
@@ -96,7 +97,7 @@ Resource\Objects\flowers.txt
 
 #flowers
 18	360	88
-
+14	1864	88
 
 
 
@@ -338,5 +339,5 @@ Resource\Objects\flowers.txt
 11	1472	92	26000
 10	1472	92
 
-
-
+#camerabound
+21	0	0	320	240

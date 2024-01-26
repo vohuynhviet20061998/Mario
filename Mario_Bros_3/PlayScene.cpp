@@ -19,6 +19,7 @@
 #include "ParaGoomba.h"
 #include "leaf.h"
 #include "FLowers.h"
+#include "flowers_xanh.h"
 #include "Koopas.h"
 
 
@@ -40,14 +41,14 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
 #define SCENE_SECTION_BACKGROUND 3
-#define SCENE_SECTION_MAP_1 4
-#define SCENE_SECTION_MAPPIPE 5
+#define SCENE_SECTION_HUD 5
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
 #define ASSETS_SECTION_ANIMATIONS 2
 
 #define MAX_SCENE_LINE 1024
+#define ADD_CY 50
 
 void CPlayScene::_ParseSection_SPRITES(string line)
 {
@@ -158,6 +159,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	case OBJECT_TYPE_FLOWER_VENUS: {
 		obj = new Flowers(x, y);
+		break;
+	}
+
+	case OBJECT_TYPE_FLOWERS_GREEN: {
+		obj = new flowers_xanh(x, y);
 		break;
 	}
 	case OBJECT_TYPE_BRICK_QUESTIONS: {
@@ -292,7 +298,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
-
 	default:
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
 		return;
@@ -312,6 +317,18 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 
 
+}
+
+void CPlayScene::_ParseSection_HUD(string line)
+{
+	vector<string> tokens = split(line);
+
+	// skip invalid lines - an object set must have at least id, x, y
+	if (tokens.size() < 2) return;
+	float x = (float)atof(tokens[1].c_str());
+	float y = (float)atof(tokens[2].c_str());
+
+	hud = new Hud(x, y);
 }
 
 
@@ -371,6 +388,7 @@ void CPlayScene::Load()
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+		if (line == "[HUD]") { section = SCENE_SECTION_HUD; continue; };
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
@@ -382,7 +400,7 @@ void CPlayScene::Load()
 			_ParseSection_ASSETS(line); break;
 		case SCENE_SECTION_OBJECTS:
 			_ParseSection_OBJECTS(line); break;
-
+		case SCENE_SECTION_HUD: _ParseSection_HUD(line); break;
 		}
 
 	}
@@ -417,12 +435,13 @@ void CPlayScene::Update(DWORD dt)
 
 	CGame* game = CGame::GetInstance();
 	cx -= game->GetBackBufferWidth() / 2;
-	cy -= game->GetBackBufferHeight() / 2;
+	cy = game->GetBackBufferHeight() / 2;
 
+	
 	if (cx < 0) cx = 0;
-	if (cy > 6) cy = 0;
 
-	CGame::GetInstance()->SetCamPos(cx, cy);
+
+	CGame::GetInstance()->SetCamPos(cx, 0);
 
 	PurgeDeletedObjects();
 }
@@ -436,7 +455,7 @@ void CPlayScene::Render()
 
 		objects[i]->Render();
 	}
-
+	//hud->Render();
 
 
 

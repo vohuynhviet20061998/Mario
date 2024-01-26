@@ -39,7 +39,7 @@ CCameraBound::CCameraBound(float x, float y, float width, float height)
 
 void CCameraBound::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void CCameraBound::GetBoundingBox(float& l, float& t, float& r, float& b)

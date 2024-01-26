@@ -129,7 +129,10 @@
     <ClCompile Include="Bigbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hub.cpp">
+    <ClCompile Include="Hud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flowers_xanh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,7 +248,10 @@
     <ClInclude Include="Bigbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hub.h">
+    <ClInclude Include="Hud.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flowers_xanh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

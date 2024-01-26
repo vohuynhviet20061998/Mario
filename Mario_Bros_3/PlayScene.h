@@ -9,6 +9,7 @@
 #include "background.h"
 #include "Goomba.h"
 #include "Koopas.h"
+#include "Hud.h"
 
 
 
@@ -19,6 +20,7 @@ class CPlayScene : public CScene
 protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
+	Hud* hud;
 	
 
 	void _ParseSection_SPRITES(string line);
@@ -26,6 +28,7 @@ protected:
 
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
+	void _ParseSection_HUD(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
 
