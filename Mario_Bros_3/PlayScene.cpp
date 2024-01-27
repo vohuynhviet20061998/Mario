@@ -21,6 +21,7 @@
 #include "FLowers.h"
 #include "flowers_xanh.h"
 #include "Koopas.h"
+#include "Piranha.h"
 
 
 
@@ -166,6 +167,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new flowers_xanh(x, y);
 		break;
 	}
+	case OBJECT_TYPE_PIRANHA: obj = new CPiranha(x, y); break;
 	case OBJECT_TYPE_BRICK_QUESTIONS: {
 		obj = new CBrick_Questions(x, y, BRICK_OBJECT_QUESTION);
 		break;

@@ -135,6 +135,12 @@
     <ClCompile Include="flowers_xanh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ReverseObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Piranha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -252,6 +258,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="flowers_xanh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Piranha.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -163,10 +163,12 @@
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="ParaGoomba.cpp" />
     <ClCompile Include="pipe.cpp" />
+    <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="ReverseObject.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="sprite.cpp" />
@@ -204,10 +206,12 @@
     <ClInclude Include="Mario.h" />
     <ClInclude Include="ParaGoomba.h" />
     <ClInclude Include="pipe.h" />
+    <ClInclude Include="Piranha.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="ReverseObject.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="sprite.h" />
