@@ -91,10 +91,12 @@ Resource\Objects\piranha.txt
 2	300	108
 
 #paraGoomba
-
+19	880	92
+19	1280	44
 
 #Koopas
 20	496	108
+20	2080	76
 
 #flowers
 18	360	88
