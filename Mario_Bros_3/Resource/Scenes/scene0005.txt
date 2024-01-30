@@ -14,6 +14,7 @@ Resource\Objects\goomba.txt
 Resource\Objects\leaf.txt
 Resource\Objects\ParaGoomba.txt
 Resource\Objects\Koopas.txt
+Resource\Objects\parakoopas.txt
 Resource\Objects\flowers.txt
 Resource\Objects\flowers_xanh.txt
 Resource\Objects\hud.txt
@@ -85,14 +86,13 @@ Resource\Objects\piranha.txt
 
 
 # MARIO
-0	1750	10
+0	2000	10
 
 # Goomba
 2	300	108
 
 #paraGoomba
 19	880	92
-19	1280	44
 
 #Koopas
 20	496	108
@@ -104,6 +104,9 @@ Resource\Objects\piranha.txt
 
 #piranha
 22	1800	102
+
+#parakopas
+23	1280	44
 
 
 
@@ -345,7 +348,3 @@ Resource\Objects\piranha.txt
 11	1472	92	26000
 10	1472	92
 
-
-
-#camerabound
-21	0	0	320	240

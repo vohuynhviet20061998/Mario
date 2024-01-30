@@ -22,7 +22,8 @@
 #include "flowers_xanh.h"
 #include "Koopas.h"
 #include "Piranha.h"
-
+#include "Parakoopa.h"
+#include "map.h"
 
 
 #include "SampleKeyEventHandler.h"
@@ -162,12 +163,22 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new Flowers(x, y);
 		break;
 	}
+	case OBJECT_TYPE_PARAKOOPAS:
+	{
+		obj = new CParaKoopa(x, y);
+		obj->SetPosition(x, y);
+		objects.push_back(obj);
+		break;
+	}
 
 	case OBJECT_TYPE_FLOWERS_GREEN: {
 		obj = new flowers_xanh(x, y);
 		break;
 	}
-	case OBJECT_TYPE_PIRANHA: obj = new CPiranha(x, y); break;
+	case OBJECT_TYPE_PIRANHA: {
+		obj = new CPiranha(x, y); 
+		break; 
+	}
 	case OBJECT_TYPE_BRICK_QUESTIONS: {
 		obj = new CBrick_Questions(x, y, BRICK_OBJECT_QUESTION);
 		break;
@@ -212,6 +223,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			sprite_begin, sprite_middle
 		);
 
+		break;
+	}
+	case OBJECT_TYPE_MAP: {
+		int sprite_id = atoi(tokens[3].c_str());
+		obj = new CMap(x, y, sprite_id);
 		break;
 	}
 	case OBJECT_TYPE_BACKGROUD:
@@ -284,12 +300,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		);
 		break;
 	}
-
-	/*case OBJECT_TYPE_MAP: {
-		int sprite_id = atoi(tokens[3].c_str());
-		obj = new CMap(x, y, sprite_id);
-		break;
-	}*/
 
 	case OBJECT_TYPE_PORTAL:
 	{
@@ -437,13 +447,11 @@ void CPlayScene::Update(DWORD dt)
 
 	CGame* game = CGame::GetInstance();
 	cx -= game->GetBackBufferWidth() / 2;
-	cy = game->GetBackBufferHeight() / 2;
+	cy -= game->GetBackBufferHeight() / 2;
 
-	
 	if (cx < 0) cx = 0;
 
-
-	CGame::GetInstance()->SetCamPos(cx, 0);
+	CGame::GetInstance()->SetCamPos(cx, cy);
 
 	PurgeDeletedObjects();
 }
@@ -457,7 +465,7 @@ void CPlayScene::Render()
 
 		objects[i]->Render();
 	}
-	//hud->Render();
+
 
 
 

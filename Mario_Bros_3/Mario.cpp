@@ -18,6 +18,10 @@
 #include "Koopas.h"
 #include "FLowers.h"
 #include "fireBall.h"
+#include "CameraBound.h"
+#include "Parakoopa.h"
+#include "Piranha.h"
+
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -86,6 +90,16 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithFlowers(e);
 	else if (dynamic_cast<fireBall*>(e->obj))
 		OnCollisionWithFireBall(e);
+	else if (dynamic_cast<CParaGoomba*>(e->obj))
+		OnCollisionWithParaGoomba(e);
+	else if (dynamic_cast<CCameraBound*>(e->obj))
+		OnCollisionWithCameraBound(e);
+	else if (dynamic_cast<CPortal*>(e->obj))
+		OnCollisionWithPortal(e);
+	else if (dynamic_cast<CPiranha*>(e->obj))
+		OnCollisionWithPiranha(e);
+	else if (dynamic_cast<CParaKoopa*>(e->obj))
+		OnCollisionWithParaKoopa(e);
 
 }
 
@@ -268,6 +282,66 @@ void CMario::OnCollisionWithFireBall(LPCOLLISIONEVENT e)
 	fireBall* fireball = dynamic_cast<fireBall*>(e->obj);
 	if (untouchable == 0) {
 		CollisionEffect();
+	}
+}
+
+void CMario::OnCollisionWithPiranha(LPCOLLISIONEVENT e)
+{
+	CPiranha* piranha = dynamic_cast<CPiranha*>(e->obj);
+
+	CollisionEffect();
+}
+
+void CMario::OnCollisionWithParaKoopa(LPCOLLISIONEVENT e)
+{
+	CParaKoopa* parakoopa = dynamic_cast<CParaKoopa*>(e->obj);
+	LPGAME game = CGame::GetInstance();
+	if (e->ny < 0)
+	{
+		if (parakoopa->GetState() != PARAKOOPA_STATE_DIE) {
+			if (parakoopa->Getlevel() != PARAKOOPA_LEVEL_NO_WING)
+			{
+				//DebugOut(L"VO WALK ROI NE");
+				parakoopa->Setlevel(PARAKOOPA_LEVEL_NO_WING);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+				//	StartUntouchable();
+			}
+			else {
+				//DebugOut(L"DIE LUN");
+				parakoopa->SetState(PARAKOOPA_STATE_DIE);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+			}
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (parakoopa->GetState() != PARAKOOPA_STATE_DIE)
+			{
+				CollisionEffect();
+			}
+			else {
+				if (game->IsKeyDown(DIK_A) && (game->IsKeyDown(DIK_RIGHT) || game->IsKeyDown(DIK_LEFT))) {
+					parakoopa->HandledByMario();
+					isPickup = true;
+				}
+				else
+				{
+					SetState(MARIO_STATE_KICK);
+					parakoopa->SetState(PARAKOOPA_STATE_SLIDE);
+				}
+				StartUntouchable();
+			}
+		}
+	}
+}
+
+void CMario::OnCollisionWithCameraBound(LPCOLLISIONEVENT e)
+{
+	CCameraBound* camerabound = dynamic_cast<CCameraBound*>(e->obj);
+	if (e->ny < 0) {
+		SetState(MARIO_STATE_DIE);
 	}
 }
 
@@ -719,7 +793,15 @@ void CMario::SetState(int state)
 			vy = -MARIO_JUMP_SPEED_Y;
 		else vy = -MARIO_JUMP_RUN_SPEED_Y;
 		break;
+	case MARIO_STATE_KICK:
+		isKicking = true;
+		if (isKicking)
+		{
+			state = MARIO_STATE_IDLE;
+		}
+		break;
 	}
+
 
 	CGameObject::SetState(state);
 }

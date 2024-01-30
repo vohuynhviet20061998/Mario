@@ -38,6 +38,8 @@
 
 #define MARIO_STATE_RACCOON		800
 
+#define MARIO_STATE_KICK			900
+
 
 #pragma region ANIMATION_ID
 
@@ -195,6 +197,7 @@
 class CMario : public CGameObject
 {
 	BOOLEAN isSitting;
+	BOOLEAN isKicking;
 	float maxVx;
 	float maxVy;
 	float ax;				// acceleration on x 
@@ -224,6 +227,9 @@ class CMario : public CGameObject
 	void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithFlowers(LPCOLLISIONEVENT e);
 	void OnCollisionWithFireBall(LPCOLLISIONEVENT e);
+	void OnCollisionWithPiranha(LPCOLLISIONEVENT e);
+	void OnCollisionWithParaKoopa(LPCOLLISIONEVENT e);
+	void OnCollisionWithCameraBound(LPCOLLISIONEVENT e);
 
 	
 
@@ -235,11 +241,12 @@ public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
+		isKicking = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY;
 
-		level = MARIO_LEVEL_BIG;
+		level = MARIO_LEVEL_SMALL;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;

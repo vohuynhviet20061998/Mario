@@ -53,6 +53,11 @@ public:
 	}
 	int get_NX() { return this->nx; }
 
+	void GetDirection(float& nx, float& ny) {
+		this->nx = nx;
+		this->ny = ny;
+	}
+
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float& x, float& y) { x = this->x; y = this->y; }

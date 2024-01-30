@@ -160,8 +160,10 @@
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="leaf.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="ParaGoomba.cpp" />
+    <ClCompile Include="Parakoopa.cpp" />
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -203,8 +205,10 @@
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="leaf.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="ParaGoomba.h" />
+    <ClInclude Include="Parakoopa.h" />
     <ClInclude Include="pipe.h" />
     <ClInclude Include="Piranha.h" />
     <ClInclude Include="Platform.h" />

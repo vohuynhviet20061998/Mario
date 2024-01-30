@@ -10,7 +10,6 @@
 #define Brick_Questions_BBOX_HEIGHT 16
 #define ID_ANI_Brick_Questions	210
 #define ID_ANI_Brick_normal		211
-//#define	ID_ANI_Brick_Tree	310
 
 #define BRICK_OBJECT_QUESTION	10
 #define BRICK_OBJECT_TREE	11
